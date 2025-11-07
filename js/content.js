@@ -34,7 +34,15 @@ export async function loadContent(slug, lang = "ko") {
     const text = await res.text();
 
     // Markdown → HTML 렌더링
-    const html = marked.parse(text);
+    let html = marked.parse(text);
+
+    // GitHub Pages를 위한 이미지 경로 수정
+    // 상대 경로(../../assets)를 절대 경로로 변환
+    const basePath = window.location.pathname.endsWith('/')
+      ? window.location.pathname
+      : window.location.pathname + '/';
+    html = html.replace(/src="\.\.\/\.\.\/(\.\.\/)?assets\//g, `src="${basePath}assets/`);
+
     doc.innerHTML = html;
 
     // 상단으로 스크롤

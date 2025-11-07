@@ -1,0 +1,104 @@
+{
+  "version": "v1.0",
+  "languages": ["ko", "en"],
+  "categories": [
+    {
+      "key": "setup",
+      "order": 1,
+      "title": {
+        "ko": "Setup",
+        "en": "Setup"
+      },
+      "items": [
+        {
+          "key": "welding_set",
+          "slug": "setup/welding-set",
+          "title": {
+            "ko": "용접 설정",
+            "en": "Welding Set"
+          }
+        }
+      ]
+    },
+    {
+      "key": "extension",
+      "order": 2,
+      "title": {
+        "ko": "Extension",
+        "en": "Extension"
+      },
+      "items": [
+        {
+          "key": "weld_adjust",
+          "slug": "extension/weld-adjust",
+          "title": {
+            "ko": "Weld Adjust",
+            "en": "Weld Adjust"
+          }
+        },
+        {
+          "key": "jump",
+          "slug": "extension/jump",
+          "title": {
+            "ko": "점프 이동",
+            "en": "Jump"
+          }
+        }
+      ]
+    },
+    {
+      "key": "tools",
+      "order": 3,
+      "title": {
+        "ko": "Tools",
+        "en": "Tools"
+      },
+      "items": [
+        {
+          "key": "io_tester",
+          "slug": "tools/io-tester",
+          "title": {
+            "ko": "I/O 테스트",
+            "en": "I/O Tester"
+          }
+        }
+      ]
+    },
+    {
+      "key": "system",
+      "order": 4,
+      "title": {
+        "ko": "System",
+        "en": "System"
+      },
+      "items": [
+        {
+          "key": "program_scheduler",
+          "slug": "system/program-scheduler",
+          "title": {
+            "ko": "프로그램 스케줄러",
+            "en": "Program Scheduler"
+          }
+        }
+      ]
+    },
+    {
+      "key": "etc",
+      "order": 5,
+      "title": {
+        "ko": "Etc",
+        "en": "Etc"
+      },
+      "items": [
+        {
+          "key": "license_manager",
+          "slug": "etc/license-manager",
+          "title": {
+            "ko": "라이선스 관리자",
+            "en": "License Manager"
+          }
+        }
+      ]
+    }
+  ]
+}

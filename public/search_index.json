@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "Extension_Jump",
+    "title": "Jump 이동 기능",
+    "desc": "로봇을 지정 위치로 이동시키는 기본 기능으로, 수동 및 자동 이동 모두 지원합니다."
+  },
+  {
+    "slug": "Setup_WeldingSet",
+    "title": "용접 세트 설정",
+    "desc": "Welding Set 메뉴에서는 용접기의 주요 파라미터를 설정할 수 있습니다."
+  },
+  {
+    "slug": "Tools_IoTester",
+    "title": "I/O 테스트 도구",
+    "desc": "입출력 신호를 직접 확인하며 테스트할 수 있는 도구입니다."
+  }
+]

@@ -38,10 +38,7 @@ export async function loadContent(slug, lang = "ko") {
 
     // GitHub Pages를 위한 이미지 경로 수정
     // 상대 경로(../../assets)를 절대 경로로 변환
-    const basePath = window.location.pathname.endsWith('/')
-      ? window.location.pathname
-      : window.location.pathname + '/';
-    html = html.replace(/src="\.\.\/\.\.\/(\.\.\/)?assets\//g, `src="${basePath}assets/`);
+    html = html.replace(/src="\.\.\/\.\.\/(\.\.\/)?assets\//g, 'src="/docs-platform/assets/');
 
     doc.innerHTML = html;
 

@@ -37,8 +37,11 @@ export async function loadContent(slug, lang = "ko") {
     let html = marked.parse(text);
 
     // GitHub Pages를 위한 이미지 경로 수정
-    // 상대 경로(../../assets)를 절대 경로로 변환
+    // 모든 상대 경로 이미지를 절대 경로로 변환
     html = html.replace(/src="\.\.\/\.\.\/(\.\.\/)?assets\//g, 'src="/docs-platform/assets/');
+    html = html.replace(/src="\.\.\/assets\//g, 'src="/docs-platform/assets/');
+    html = html.replace(/src="\.\/assets\//g, 'src="/docs-platform/assets/');
+    html = html.replace(/src="assets\//g, 'src="/docs-platform/assets/');
 
     doc.innerHTML = html;
 

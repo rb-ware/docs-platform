@@ -3,6 +3,41 @@
   "languages": ["ko", "en"],
   "categories": [
     {
+      "id": "device_setup",
+      "key": "device_setup",
+      "order": 0,
+      "title": {
+        "ko": "장비 세팅",
+        "en": "Device Setup"
+      },
+      "items": [
+        {
+          "key": "device_installation",
+          "slug": "device_setup/device-installation",
+          "title": {
+            "ko": "장비 설치",
+            "en": "Device Installation"
+          }
+        },
+        {
+          "key": "communication_setup",
+          "slug": "device_setup/communication-setup",
+          "title": {
+            "ko": "장비 간 통신 연결",
+            "en": "Communication Setup"
+          }
+        },
+        {
+          "key": "license_installation",
+          "slug": "device_setup/license-installation",
+          "title": {
+            "ko": "라이선스 설치",
+            "en": "License Installation"
+          }
+        }
+      ]
+    },
+    {
       "id": "setup",
       "key": "setup",
       "order": 1,

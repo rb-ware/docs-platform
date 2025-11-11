@@ -42,10 +42,34 @@
       "key": "setup",
       "order": 1,
       "title": {
-        "ko": "Setup",
+        "ko": "설정",
         "en": "Setup"
       },
       "items": [
+        {
+          "key": "system_set",
+          "slug": "setup/system-set",
+          "title": {
+            "ko": "시스템 설정",
+            "en": "System Set"
+          }
+        },
+        {
+          "key": "utilities",
+          "slug": "setup/utilities",
+          "title": {
+            "ko": "유틸리티",
+            "en": "Utilities"
+          }
+        },
+        {
+          "key": "tcp_set",
+          "slug": "setup/tcp-set",
+          "title": {
+            "ko": "TCP 설정",
+            "en": "TCP Set"
+          }
+        },
         {
           "key": "welding_set",
           "slug": "setup/welding-set",
@@ -61,24 +85,80 @@
       "key": "extension",
       "order": 2,
       "title": {
-        "ko": "Extension",
+        "ko": "확장 기능",
         "en": "Extension"
       },
       "items": [
         {
-          "key": "weld_adjust",
-          "slug": "extension/weld-adjust",
+          "key": "weaving",
+          "slug": "extension/weaving",
           "title": {
-            "ko": "Weld Adjust",
-            "en": "Weld Adjust"
+            "ko": "위빙 1",
+            "en": "Weaving 1"
+          }
+        },
+        {
+          "key": "program_call",
+          "slug": "extension/program-call",
+          "title": {
+            "ko": "프로그램 호출",
+            "en": "Program Call"
+          }
+        },
+        {
+          "key": "shift",
+          "slug": "extension/shift",
+          "title": {
+            "ko": "시프트",
+            "en": "Shift"
           }
         },
         {
           "key": "jump",
           "slug": "extension/jump",
           "title": {
-            "ko": "점프 이동",
+            "ko": "점프",
             "en": "Jump"
+          }
+        },
+        {
+          "key": "dio_output",
+          "slug": "extension/dio-output",
+          "title": {
+            "ko": "D/A 출력",
+            "en": "D/A Output"
+          }
+        },
+        {
+          "key": "batch_weld_mod",
+          "slug": "extension/batch-weld-mod",
+          "title": {
+            "ko": "일괄 용접 수정",
+            "en": "Batch Weld Mod"
+          }
+        },
+        {
+          "key": "weld_adjust",
+          "slug": "extension/weld-adjust",
+          "title": {
+            "ko": "용접 조정",
+            "en": "Weld Adjust"
+          }
+        },
+        {
+          "key": "repeat",
+          "slug": "extension/repeat",
+          "title": {
+            "ko": "반복",
+            "en": "Repeat"
+          }
+        },
+        {
+          "key": "multi_pass",
+          "slug": "extension/multi-pass",
+          "title": {
+            "ko": "다층 패스",
+            "en": "Multi Pass"
           }
         }
       ]
@@ -88,32 +168,29 @@
       "key": "tools",
       "order": 3,
       "title": {
-        "ko": "Tools",
+        "ko": "Tool",
         "en": "Tools"
       },
       "items": [
         {
+          "key": "download_rb_log",
+          "slug": "tools/download-rb-log",
+          "title": {
+            "ko": "Download RB_Log",
+            "en": "Download RB_Log"
+          }
+        },
+        {
           "key": "io_tester",
           "slug": "tools/io-tester",
           "title": {
-            "ko": "I/O 테스트",
+            "ko": "I/O 테스터",
             "en": "I/O Tester"
           }
-        }
-      ]
-    },
-    {
-      "id": "system",
-      "key": "system",
-      "order": 4,
-      "title": {
-        "ko": "System",
-        "en": "System"
-      },
-      "items": [
+        },
         {
           "key": "program_scheduler",
-          "slug": "system/program-scheduler",
+          "slug": "tools/program-scheduler",
           "title": {
             "ko": "프로그램 스케줄러",
             "en": "Program Scheduler"
@@ -124,9 +201,9 @@
     {
       "id": "etc",
       "key": "etc",
-      "order": 5,
+      "order": 4,
       "title": {
-        "ko": "Etc",
+        "ko": "기타",
         "en": "Etc"
       },
       "items": [

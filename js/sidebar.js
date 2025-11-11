@@ -7,6 +7,7 @@
  */
 
 export async function initSidebar(currentLang = "ko", onSelect) {
+  const isProduction = window.location.hostname.includes('github.io');
   try {
     const res = await fetch("./manifest.json", { cache: "no-store" });
     const data = await res.json();
@@ -51,7 +52,14 @@ export async function initSidebar(currentLang = "ko", onSelect) {
 
         cat.items.forEach((item) => {
           const link = document.createElement("a");
-          link.href = `#/${item.slug}`;
+
+          // Hybrid routing: hash for local, clean URL for production
+          if (isProduction) {
+            link.href = `/docs-platform/${currentLang}/${item.slug}`;
+          } else {
+            link.href = `#/${item.slug}`;
+          }
+
           link.textContent = item.title[currentLang] || item.title.en;
           link.className =
             "block px-2 py-1.5 rounded-md text-gray-600 hover:bg-[#f5f5f5] hover:text-[#ff2e2e] transition-colors duration-150";

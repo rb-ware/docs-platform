@@ -4,7 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RBWare Docs Platform</title>
-    <base href="/docs-platform/">
+    <script>
+      // 환경에 따라 base path 동적 설정
+      const isGitHubPages = window.location.hostname.includes('github.io');
+      if (isGitHubPages) {
+        document.write('<base href="/docs-platform/">');
+      }
+
+      // Handle 404 redirect from GitHub Pages
+      (function() {
+        const params = new URLSearchParams(window.location.search);
+        const redirectPath = params.get('p');
+        if (redirectPath) {
+          const basePath = isGitHubPages ? '/docs-platform' : '';
+          window.history.replaceState(null, '', basePath + redirectPath);
+        }
+      })();
+    </script>
 
     <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>

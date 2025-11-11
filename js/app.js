@@ -1,13 +1,12 @@
 /**
  * app.js
  * Main initialization for RBWare Docs
- * Handles language persistence, sidebar init, header events, and dynamic reload
+ * Hybrid routing: Hash for local dev, Clean URLs for production
  */
 import { initHeader } from "./header.js";
 import { initSidebar } from "./sidebar.js";
 import { loadContent } from "./content.js";
 import { initSearch } from "./search.js";
-
 
 let currentLang = localStorage.getItem("lang") || "ko";
 let currentSlug = null;
@@ -17,64 +16,105 @@ function getCurrentLang() {
   return localStorage.getItem("lang") || "ko";
 }
 
-// Load header and sidebar
+// Check if we're on GitHub Pages
+const isProduction = window.location.hostname.includes('github.io');
+
+// Parse route based on environment
+function parseRoute() {
+  if (isProduction) {
+    // Production: Clean URLs like /docs-platform/ko/setup/system-set
+    let pathname = window.location.pathname;
+    pathname = pathname.replace('/docs-platform/', '').replace(/^\/|\/$/g, '');
+    const parts = pathname.split('/').filter(Boolean);
+
+    if (parts.length > 0 && ['ko', 'en'].includes(parts[0])) {
+      return {
+        lang: parts[0],
+        slug: parts.slice(1).join('/')
+      };
+    }
+    return { lang: getCurrentLang(), slug: '' };
+  } else {
+    // Local dev: Hash routing like #/setup/system-set
+    const hash = window.location.hash.replace('#/', '');
+    return { lang: getCurrentLang(), slug: hash };
+  }
+}
+
+// Navigate to a route
+function navigateTo(lang, slug) {
+  currentLang = lang;
+  currentSlug = slug;
+  localStorage.setItem("lang", lang);
+
+  if (isProduction) {
+    // Production: Use clean URLs
+    const path = slug ? `/docs-platform/${lang}/${slug}` : `/docs-platform/${lang}`;
+    window.history.pushState({ lang, slug }, '', path);
+  } else {
+    // Local dev: Use hash routing
+    window.location.hash = slug ? `#/${slug}` : '';
+  }
+
+  if (slug) {
+    loadContent(slug, lang);
+  }
+}
+
+// Initialize app
 await initHeader();
 await initSidebar(currentLang, (slug) => {
-  currentSlug = slug;
-  loadContent(slug, getCurrentLang());
+  navigateTo(getCurrentLang(), slug);
 });
 await initSearch(currentLang);
 
-// Sidebar toggle for mobile
-document.addEventListener("click", (e) => {
-  const menuToggle = document.getElementById("menuToggle");
-  const sidebar = document.getElementById("sidebar");
-  if (menuToggle && e.target === menuToggle) sidebar.classList.toggle("show");
-});
-
-// Language switcher event
+// Language switcher
 const langSelect = document.getElementById("langSelect");
 if (langSelect) {
   langSelect.value = currentLang;
   langSelect.addEventListener("change", async (e) => {
-    currentLang = e.target.value;
-    localStorage.setItem("lang", currentLang);
+    const newLang = e.target.value;
+    await initSidebar(newLang, (slug) => navigateTo(newLang, slug));
 
-    // Refresh sidebar with new language
-    await initSidebar(currentLang, (slug) => {
-      currentSlug = slug;
-      loadContent(slug, getCurrentLang());
-    });
-
-    // Reload current document in new language
     if (currentSlug) {
-      await loadContent(currentSlug, currentLang);
+      navigateTo(newLang, currentSlug);
     }
   });
-} else {
-  console.error("❌ langSelect element not found after initHeader");
 }
 
-// Hash router
-window.addEventListener("hashchange", () => {
-  const slug = location.hash.replace("#/", "");
-  if (slug) {
-    currentSlug = slug;
-    loadContent(slug, getCurrentLang());
-  }
-});
+// Route change handlers
+if (isProduction) {
+  // Production: Handle popstate for clean URLs
+  window.addEventListener("popstate", () => {
+    const route = parseRoute();
+    currentLang = route.lang;
+    currentSlug = route.slug;
+    localStorage.setItem("lang", route.lang);
+    if (route.slug) loadContent(route.slug, route.lang);
+    if (langSelect) langSelect.value = route.lang;
+  });
+} else {
+  // Local dev: Handle hash changes
+  window.addEventListener("hashchange", () => {
+    const route = parseRoute();
+    currentSlug = route.slug;
+    if (route.slug) loadContent(route.slug, getCurrentLang());
+  });
+}
 
-// Initial load if hash exists
-const initialHash = location.hash.replace("#/", "");
-if (initialHash) {
-  currentSlug = initialHash;
-  loadContent(initialHash, getCurrentLang());
+// Initial page load
+const initialRoute = parseRoute();
+if (initialRoute.slug) {
+  currentLang = initialRoute.lang;
+  currentSlug = initialRoute.slug;
+  localStorage.setItem("lang", initialRoute.lang);
+  loadContent(initialRoute.slug, initialRoute.lang);
+  if (langSelect) langSelect.value = initialRoute.lang;
 }
 
 // Mobile sidebar toggle (already exists)
 const menuToggle = document.getElementById("menuToggle");
 const sidebar = document.getElementById("sidebar");
-const contentArea = document.getElementById("contentArea");
 
 if (menuToggle && sidebar) {
   // 열기 / 닫기 토글

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    // GitHub Pages SPA redirect hack
+    (function() {
+      const isGitHubPages = window.location.hostname.includes('github.io');
+
+      if (isGitHubPages) {
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        const repo = 'docs-platform';
+
+        // Remove repo name from path if it exists
+        const repoIndex = pathSegments.indexOf(repo);
+        if (repoIndex !== -1) {
+          pathSegments.splice(repoIndex, 1);
+        }
+
+        // Reconstruct the path
+        const path = '/' + pathSegments.join('/');
+
+        // Redirect to index.html with the path preserved
+        const redirectUrl = window.location.origin + '/' + repo + '/?p=' + encodeURIComponent(path);
+        window.location.replace(redirectUrl);
+      } else {
+        // For local development, just redirect to index.html
+        window.location.replace('/index.html?p=' + encodeURIComponent(window.location.pathname));
+      }
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>

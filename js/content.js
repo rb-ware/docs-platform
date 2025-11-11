@@ -4,6 +4,7 @@
  * RBWare Docs — version + language + category 기반 Markdown 렌더링
  */
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+import { getAssetPath } from "./utils.js";
 
 // 현재 사용 중인 문서 버전 (필요하면 나중에 manifest.json에서 가져오도록 변경 가능)
 const DOC_VERSION = "v1.0";
@@ -36,12 +37,11 @@ export async function loadContent(slug, lang = "ko") {
     // Markdown → HTML 렌더링
     let html = marked.parse(text);
 
-    // GitHub Pages를 위한 이미지 경로 수정
-    // 모든 상대 경로 이미지를 절대 경로로 변환
-    html = html.replace(/src="\.\.\/\.\.\/(\.\.\/)?assets\//g, 'src="/docs-platform/assets/');
-    html = html.replace(/src="\.\.\/assets\//g, 'src="/docs-platform/assets/');
-    html = html.replace(/src="\.\/assets\//g, 'src="/docs-platform/assets/');
-    html = html.replace(/src="assets\//g, 'src="/docs-platform/assets/');
+    // 환경에 맞게 이미지 경로 동적 변환
+    // 마크다운의 상대 경로 (../../../assets/, ../../assets/, ../assets/, assets/) 처리
+    html = html.replace(/src="(\.\.\/)*assets\//g, () => {
+      return `src="${getAssetPath('assets/')}`;
+    });
 
     doc.innerHTML = html;
 

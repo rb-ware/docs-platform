@@ -174,7 +174,6 @@ export const LANDING_HTML = `
           <p class="font-medium text-gray-300">Headquarters</p>
           <p>63, Samwon-ro, Deogyang-gu, Goyang-si,</p>
           <p>Gyeonggi-do, 10550, Rep. of Korea</p>
-          <p class="mt-2">+82 10-7309-0411</p>
         </div>
       </div>
 

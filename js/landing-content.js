@@ -170,11 +170,6 @@ export const LANDING_HTML = `
         <p class="text-sm text-gray-400 leading-relaxed mb-3">
           Collaborative robot welding and grinding automation solutions
         </p>
-        <div class="text-sm text-gray-400 space-y-1">
-          <p class="font-medium text-gray-300">Headquarters</p>
-          <p>63, Samwon-ro, Deogyang-gu, Goyang-si,</p>
-          <p>Gyeonggi-do, 10550, Rep. of Korea</p>
-        </div>
       </div>
 
       <!-- Contact & Social -->

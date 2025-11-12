@@ -1,7 +1,7 @@
 /**
  * RBWare Docs - Unified Search (Desktop + Mobile)
  */
-import { loadContent } from "./content.js";
+import { loadContent } from "./ContentService.js";
 
 let indexCache = [];
 let currentLang = "ko";

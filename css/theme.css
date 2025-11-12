@@ -31,6 +31,32 @@ body {
 }
 
 /* ========================================
+   SIDEBAR - Mobile & Desktop Behavior
+   ======================================== */
+/* State-based control: Only visible when .sidebar-visible class is added */
+/* Mobile: Always slides in/out with toggle (translate-x-0 / -translate-x-full) */
+/* Desktop: Auto-visible on document pages with .sidebar-visible class */
+@media (min-width: 768px) {
+  #sidebar.sidebar-visible {
+    transform: translateX(0) !important;
+  }
+}
+
+/* Overlay for mobile sidebar */
+#sidebarOverlay {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ========================================
    SCROLLBAR STYLING (Optional)
    ======================================== */
 

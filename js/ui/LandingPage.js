@@ -20,38 +20,36 @@ export const LANDING_HTML = `
       <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed"><br>
         <b>Simplifying Welding Automation. Empowering Smart Fabrication.</b>
         <br/>
-        Collaborative robots meet intelligent software — the easiest way to achieve professional welding and grinding.
+        Collaborative robots meet intelligent software. The easiest way to achieve professional welding and grinding.
       </p>
 
       <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <div class="relative z-20 flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="#/device_setup/device-installation"
-           class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-[#ff2e2e] to-[#ff6b6b] rounded-full overflow-hidden shadow-2xl hover:shadow-[#ff2e2e]/50 transition-all duration-300 hover:scale-105">
+           class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-[#ff2e2e] to-[#ff6b6b] rounded-full overflow-hidden shadow-2xl hover:shadow-xl transition-all duration-300 hover:scale-105">
           <span class="relative z-10 flex items-center">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
             RB-X Manual
           </span>
-          <div class="absolute inset-0 bg-gradient-to-r from-[#ff6b6b] to-[#ff2e2e] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </a>
 
         <a href="https://rbweld-my.sharepoint.com/:f:/g/personal/juho_park_rb-ware_com/Evhj4zga8jNAtzfYnTVzntQBRALG4VEs5vN7Qd5BWF4dGA?e=rI8h7H" target="_blank" rel="noopener noreferrer"
-           class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#ff2e2e] bg-white rounded-full overflow-hidden shadow-2xl hover:shadow-white/50 transition-all duration-300 hover:scale-105 border-2 border-white">
+           class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#ff2e2e] bg-white rounded-full overflow-hidden shadow-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-white">
           <span class="relative z-10 flex items-center">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
             </svg>
             Download
           </span>
-          <div class="absolute inset-0 bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </a>
       </div>
     </div>
   </div>
 
   <!-- Wave separator -->
-  <div class="absolute bottom-0 left-0 right-0">
+  <div class="absolute bottom-0 left-0 right-0 z-10 pointer-events-none">
     <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
     </svg>

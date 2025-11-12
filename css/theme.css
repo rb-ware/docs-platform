@@ -109,11 +109,14 @@ body {
 /* Default: Full width (for landing page) */
 #contentArea {
   margin-left: 0;
+  transition: margin-left 0.2s ease-in-out;
 }
 
-/* Document page: Add left margin for sidebar */
-#contentArea.has-sidebar {
-  margin-left: 256px; /* Sidebar width: 16rem */
+/* Document page: Add left margin for sidebar (Desktop only) */
+@media (min-width: 769px) {
+  #contentArea.has-sidebar {
+    margin-left: 256px; /* Sidebar width: 16rem = 256px */
+  }
 }
 
 /* ========================================

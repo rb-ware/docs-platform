@@ -15,15 +15,11 @@ const DOC_VERSION = "v1.0";
  */
 export async function loadContent(slug, lang = "ko") {
   const doc = document.getElementById("docContent");
-  const contentArea = document.getElementById("contentArea");
 
   if (!doc) return;
 
-  // Switch to doc mode layout
-  if (contentArea) {
-    contentArea.className = "flex-1 p-6 md:p-12 pl-4 md:pl-8 bg-white";
-  }
-  doc.className = "prose w-full max-w-4xl mx-auto px-4";
+  // Set prose styling (don't touch contentArea - that's layout's responsibility)
+  doc.className = "prose w-full max-w-4xl mx-auto px-6 md:px-12 py-8";
 
   // 실제 파일 경로: ./content/v1.0/ko/extension/jump.md
   const basePath = `./content/${DOC_VERSION}/${lang}/${slug}.md`;

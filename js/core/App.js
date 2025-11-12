@@ -16,6 +16,7 @@ let currentSlug = null;
 
 /**
  * Show landing page
+ * Responsibility: Layout structure only
  */
 function showLanding() {
   const docContent = document.getElementById("docContent");
@@ -24,12 +25,12 @@ function showLanding() {
 
   if (!docContent) return;
 
-  // Completely hide sidebar (prevent flashing)
+  // Hide sidebar
   if (sidebar) {
     sidebar.classList.add("hidden");
   }
 
-  // Set landing page layout
+  // Landing page layout: full width, no sidebar margin
   if (contentArea) {
     contentArea.className = "w-full bg-white";
   }
@@ -40,6 +41,7 @@ function showLanding() {
 
 /**
  * Show document page with sidebar
+ * Responsibility: Layout structure only
  */
 function showDocumentPage() {
   const sidebar = document.getElementById("sidebar");
@@ -50,9 +52,9 @@ function showDocumentPage() {
     sidebar.classList.remove("hidden");
   }
 
-  // Set document page layout
+  // Document page layout: sidebar margin + padding
   if (contentArea) {
-    contentArea.className = "flex-1 has-sidebar";
+    contentArea.className = "flex-1 has-sidebar bg-white";
   }
 }
 

@@ -17,9 +17,10 @@ export const LANDING_HTML = `
         </span>
       </h1>
 
-      <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-        Complete documentation for collaborative robot welding & grinding solutions.<br/>
-        Easy-to-use software for professional automation.
+      <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed"><br>
+        <b>Simplifying Welding Automation. Empowering Smart Fabrication.</b>
+        <br/>
+        Collaborative robots meet intelligent software — the easiest way to achieve professional welding and grinding.
       </p>
 
       <!-- CTA Buttons -->

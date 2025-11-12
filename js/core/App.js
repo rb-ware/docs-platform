@@ -11,7 +11,7 @@ import { loadContent } from "../services/ContentService.js";
 import { initSearch } from "../services/SearchService.js";
 import { LANDING_HTML } from "../ui/LandingPage.js";
 
-let currentLang = getCurrentLang();
+// Application state
 let currentSlug = null;
 
 /**
@@ -72,7 +72,8 @@ async function ensureSidebarInitialized(lang) {
  * Handle navigation between pages
  */
 async function handleNavigation(lang, slug) {
-  currentLang = lang;
+  // Update state
+  localStorage.setItem("lang", lang);
   currentSlug = slug;
 
   if (slug) {
@@ -92,7 +93,7 @@ export async function startApp() {
   await initHeader();
 
   // Initialize search
-  await initSearch(currentLang);
+  await initSearch(getCurrentLang());
 
   // Language switcher
   setupLanguageSwitcher();
@@ -115,7 +116,7 @@ function setupLanguageSwitcher() {
   const langSelect = document.getElementById("langSelect");
   if (!langSelect) return;
 
-  langSelect.value = currentLang;
+  langSelect.value = getCurrentLang();
   langSelect.addEventListener("change", async (e) => {
     const newLang = e.target.value;
 
@@ -134,22 +135,21 @@ function setupLanguageSwitcher() {
  * Setup route change handlers
  */
 function setupRouteHandlers() {
-  const langSelect = document.getElementById("langSelect");
+  // Unified route change handler
+  const handleRouteChange = async () => {
+    const route = parseRoute();
+    await handleNavigation(route.lang, route.slug);
 
-  if (isProductionEnv()) {
-    // Production: Handle popstate for clean URLs
-    window.addEventListener("popstate", async () => {
-      const route = parseRoute();
-      await handleNavigation(route.lang, route.slug);
-      if (langSelect) langSelect.value = route.lang;
-    });
-  } else {
-    // Local dev: Handle hash changes
-    window.addEventListener("hashchange", async () => {
-      const route = parseRoute();
-      await handleNavigation(route.lang, route.slug);
-    });
-  }
+    // Update language selector if present
+    const langSelect = document.getElementById("langSelect");
+    if (langSelect && langSelect.value !== route.lang) {
+      langSelect.value = route.lang;
+    }
+  };
+
+  // Listen to appropriate event based on environment
+  const eventName = isProductionEnv() ? "popstate" : "hashchange";
+  window.addEventListener(eventName, handleRouteChange);
 }
 
 /**

@@ -17,14 +17,11 @@ export async function loadContent(slug, lang = "ko") {
   const doc = document.getElementById("docContent");
   const contentArea = document.getElementById("contentArea");
 
-  if (!doc) {
-    console.error("docContent element not found");
-    return;
-  }
+  if (!doc) return;
 
-  // Ensure we're in doc mode (not landing page mode)
+  // Switch to doc mode layout
   if (contentArea) {
-    contentArea.className = "flex-1 overflow-y-auto p-8 md:p-12 bg-white text-gray-800 leading-relaxed";
+    contentArea.className = "flex-1 p-8 md:p-12 bg-white";
   }
   doc.className = "prose max-w-4xl mx-auto";
 

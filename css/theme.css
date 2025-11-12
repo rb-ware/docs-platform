@@ -1,15 +1,6 @@
 /* ========================================
-   SMOOTH SCROLLING
+   HEADER - Fixed at top
    ======================================== */
-html {
-  scroll-behavior: smooth;
-}
-
-/* ========================================
-   LAYOUT STRUCTURE
-   ======================================== */
-
-/* Fixed header */
 #header {
   position: fixed;
   top: 0;
@@ -19,13 +10,8 @@ html {
   height: 64px;
 }
 
-/* Main container below header */
-body {
-  padding-top: 64px;
-}
-
 /* ========================================
-   SCROLLBAR STYLING
+   SCROLLBAR STYLING (Optional)
    ======================================== */
 
 /* Sidebar scrollbar */

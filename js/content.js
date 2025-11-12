@@ -15,10 +15,18 @@ const DOC_VERSION = "v1.0";
  */
 export async function loadContent(slug, lang = "ko") {
   const doc = document.getElementById("docContent");
+  const contentArea = document.getElementById("contentArea");
+
   if (!doc) {
     console.error("docContent element not found");
     return;
   }
+
+  // Ensure we're in doc mode (not landing page mode)
+  if (contentArea) {
+    contentArea.className = "flex-1 overflow-y-auto p-8 md:p-12 bg-white text-gray-800 leading-relaxed";
+  }
+  doc.className = "prose max-w-4xl mx-auto";
 
   // 실제 파일 경로: ./content/v1.0/ko/extension/jump.md
   const basePath = `./content/${DOC_VERSION}/${lang}/${slug}.md`;
@@ -43,7 +51,14 @@ export async function loadContent(slug, lang = "ko") {
       return `src="${getAssetPath('assets/')}`;
     });
 
-    doc.innerHTML = html;
+    // Add footer to doc content
+    const footer = `
+      <footer class="py-8 mt-16 text-center text-xs text-gray-400 border-t border-gray-200">
+        © 2025 RBWare Co., Ltd. All rights reserved.
+      </footer>
+    `;
+
+    doc.innerHTML = html + footer;
 
     // 상단으로 스크롤
     const contentArea = document.getElementById("contentArea");

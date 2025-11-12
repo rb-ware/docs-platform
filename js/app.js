@@ -7,6 +7,7 @@ import { initHeader } from "./header.js";
 import { initSidebar } from "./sidebar.js";
 import { loadContent } from "./content.js";
 import { initSearch } from "./search.js";
+import { LANDING_HTML } from "./landing-content.js";
 
 let currentLang = localStorage.getItem("lang") || "ko";
 let currentSlug = null;
@@ -64,6 +65,7 @@ function navigateTo(lang, slug) {
 // Initialize app
 await initHeader();
 await initSidebar(currentLang, (slug) => {
+  showDocContent(); // Switch to doc layout
   navigateTo(getCurrentLang(), slug);
 });
 await initSearch(currentLang);
@@ -102,14 +104,42 @@ if (isProduction) {
   });
 }
 
+// Show landing page
+function showLanding() {
+  const docContent = document.getElementById("docContent");
+
+  if (!docContent) {
+    console.error("docContent element not found");
+    return;
+  }
+
+  // Use imported landing HTML directly (no fetch needed)
+  docContent.innerHTML = LANDING_HTML;
+
+  console.log("✅ Landing page loaded");
+  console.log("✅ HTML length:", LANDING_HTML.length);
+  console.log("✅ Contains footer?", LANDING_HTML.includes("</footer>"));
+  console.log("✅ DOM children count:", docContent.children.length);
+}
+
+// Show doc content
+function showDocContent() {
+  // No special handling needed - content.js manages its own styling
+}
+
 // Initial page load
 const initialRoute = parseRoute();
 if (initialRoute.slug) {
+  // Has route: show document
   currentLang = initialRoute.lang;
   currentSlug = initialRoute.slug;
   localStorage.setItem("lang", initialRoute.lang);
+  showDocContent();
   loadContent(initialRoute.slug, initialRoute.lang);
   if (langSelect) langSelect.value = initialRoute.lang;
+} else {
+  // No route: show landing page
+  showLanding();
 }
 
 // Mobile sidebar toggle (already exists)

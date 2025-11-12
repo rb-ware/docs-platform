@@ -30,38 +30,26 @@
     <meta name="theme-color" content="#071B3C" />
   </head>
 
-  <body class="bg-rb-bg text-rb-text min-h-screen flex flex-col">
+  <body class="bg-rb-bg text-rb-text pt-16">
     <!-- Global Header (Fixed) -->
     <div id="header"></div>
 
-    <!-- Main Layout -->
-    <div class="flex flex-1 overflow-hidden">
-      <!-- Sidebar -->
+    <!-- Main Layout: Simple flex layout -->
+    <div class="flex min-h-screen">
+      <!-- Sidebar: Fixed position, scrollable -->
       <aside
         id="sidebar"
-        class="bg-white w-56 md:w-64 flex-shrink-0 overflow-y-auto border-r border-gray-200
-               transition-transform duration-200 ease-in-out transform md:translate-x-0
-               -translate-x-full md:static fixed h-full z-40"
+        class="fixed top-16 left-0 h-[calc(100vh-4rem)] w-56 md:w-64
+               bg-white border-r border-gray-200 overflow-y-auto z-40
+               transition-transform duration-200 ease-in-out
+               -translate-x-full md:translate-x-0"
       >
         <nav id="sidebarMenu" class="p-6 space-y-2 text-gray-700 text-sm"></nav>
       </aside>
 
-      <!-- Content -->
-      <main
-        id="contentArea"
-        class="flex-1 overflow-y-auto p-8 md:p-12 bg-white text-gray-800 leading-relaxed"
-      >
-        <article id="docContent" class="prose max-w-4xl mx-auto">
-          <h2 class="text-2xl font-semibold mb-3 text-[#ff2e2e]">
-            Welcome to RBWare Docs 👋
-          </h2>
-          <p class="text-gray-600">Select a topic from the sidebar to begin.</p>
-        </article>
-
-        <!-- Footer -->
-        <footer class="max-w-4xl mx-auto py-8 mt-16 text-center text-xs text-gray-400 border-t border-gray-200">
-          © 2025 RBWare Co., Ltd. All rights reserved.
-        </footer>
+      <!-- Content: Natural page flow, no scroll container -->
+      <main id="contentArea" class="flex-1 md:ml-64">
+        <article id="docContent"></article>
       </main>
     </div>
 

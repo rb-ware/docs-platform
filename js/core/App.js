@@ -41,17 +41,9 @@ function showLanding() {
 /**
  * Show document page with sidebar
  */
-async function showDocumentPage() {
+function showDocumentPage() {
   const sidebar = document.getElementById("sidebar");
   const contentArea = document.getElementById("contentArea");
-
-  // Initialize sidebar if not already initialized
-  const sidebarMenu = document.getElementById("sidebarMenu");
-  if (sidebarMenu && sidebarMenu.children.length === 0) {
-    await initSidebar(getCurrentLang(), (slug) => {
-      navigateTo(getCurrentLang(), slug, handleNavigation);
-    });
-  }
 
   // Show sidebar
   if (sidebar) {
@@ -65,13 +57,26 @@ async function showDocumentPage() {
 }
 
 /**
+ * Ensure sidebar is initialized (call once per language)
+ */
+async function ensureSidebarInitialized(lang) {
+  const sidebarMenu = document.getElementById("sidebarMenu");
+  if (sidebarMenu && sidebarMenu.children.length === 0) {
+    await initSidebar(lang, (slug) => {
+      navigateTo(lang, slug, handleNavigation);
+    });
+  }
+}
+
+/**
  * Handle navigation between pages
  */
-function handleNavigation(lang, slug) {
+async function handleNavigation(lang, slug) {
   currentLang = lang;
   currentSlug = slug;
 
   if (slug) {
+    await ensureSidebarInitialized(lang);
     showDocumentPage();
     loadContent(slug, lang);
   } else {
@@ -86,84 +91,65 @@ export async function startApp() {
   // Initialize header
   await initHeader();
 
-  // Determine initial page type
-  const initialRoute = parseRoute();
-  const isDocumentPage = !!initialRoute.slug;
-
-  // Only initialize sidebar if we're on a document page
-  if (isDocumentPage) {
-    await initSidebar(currentLang, (slug) => {
-      navigateTo(getCurrentLang(), slug, handleNavigation);
-    });
-  }
-
   // Initialize search
   await initSearch(currentLang);
 
   // Language switcher
-  const langSelect = document.getElementById("langSelect");
-  if (langSelect) {
-    langSelect.value = currentLang;
-    langSelect.addEventListener("change", async (e) => {
-      const newLang = e.target.value;
-
-      // Only re-initialize sidebar if we're on a document page
-      if (currentSlug) {
-        await initSidebar(newLang, (slug) => navigateTo(newLang, slug, handleNavigation));
-        navigateTo(newLang, currentSlug, handleNavigation);
-      }
-    });
-  }
+  setupLanguageSwitcher();
 
   // Route change handlers
+  setupRouteHandlers();
+
+  // Initial page load
+  const initialRoute = parseRoute();
+  await handleNavigation(initialRoute.lang, initialRoute.slug);
+
+  // Mobile sidebar toggle
+  setupMobileSidebarToggle();
+}
+
+/**
+ * Setup language switcher
+ */
+function setupLanguageSwitcher() {
+  const langSelect = document.getElementById("langSelect");
+  if (!langSelect) return;
+
+  langSelect.value = currentLang;
+  langSelect.addEventListener("change", async (e) => {
+    const newLang = e.target.value;
+
+    // Re-initialize sidebar with new language if on document page
+    if (currentSlug) {
+      const sidebarMenu = document.getElementById("sidebarMenu");
+      if (sidebarMenu) {
+        sidebarMenu.innerHTML = ""; // Clear existing sidebar
+      }
+      await handleNavigation(newLang, currentSlug);
+    }
+  });
+}
+
+/**
+ * Setup route change handlers
+ */
+function setupRouteHandlers() {
+  const langSelect = document.getElementById("langSelect");
+
   if (isProductionEnv()) {
     // Production: Handle popstate for clean URLs
-    window.addEventListener("popstate", () => {
+    window.addEventListener("popstate", async () => {
       const route = parseRoute();
-      currentLang = route.lang;
-      currentSlug = route.slug;
-      localStorage.setItem("lang", route.lang);
-
-      if (route.slug) {
-        showDocumentPage();
-        loadContent(route.slug, route.lang);
-      } else {
-        showLanding();
-      }
-
+      await handleNavigation(route.lang, route.slug);
       if (langSelect) langSelect.value = route.lang;
     });
   } else {
     // Local dev: Handle hash changes
-    window.addEventListener("hashchange", () => {
+    window.addEventListener("hashchange", async () => {
       const route = parseRoute();
-      currentSlug = route.slug;
-
-      if (route.slug) {
-        showDocumentPage();
-        loadContent(route.slug, getCurrentLang());
-      } else {
-        showLanding();
-      }
+      await handleNavigation(route.lang, route.slug);
     });
   }
-
-  // Initial page load
-  if (isDocumentPage) {
-    // Has route: show document page
-    currentLang = initialRoute.lang;
-    currentSlug = initialRoute.slug;
-    localStorage.setItem("lang", initialRoute.lang);
-    showDocumentPage();
-    loadContent(initialRoute.slug, initialRoute.lang);
-    if (langSelect) langSelect.value = initialRoute.lang;
-  } else {
-    // No route: show landing page
-    showLanding();
-  }
-
-  // Mobile sidebar toggle
-  setupMobileSidebarToggle();
 }
 
 /**

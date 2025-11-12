@@ -168,7 +168,8 @@ export const LANDING_HTML = `
       <div>
         <h4 class="text-white font-semibold text-base mb-3">RBWare</h4>
         <p class="text-sm text-gray-400 leading-relaxed mb-3">
-          Collaborative robot welding and grinding automation solutions
+          Collaborative robot solutions for welding and grinding automation. 
+          <br>Easy-to-use software for professional applications.
         </p>
       </div>
 
@@ -178,7 +179,7 @@ export const LANDING_HTML = `
         <div class="space-y-2 text-sm mb-4">
           <p class="text-gray-400">
             <a href="mailto:sales@rb-ware.com" class="hover:text-[#ff2e2e] transition-colors">
-              sales@rb-ware.com
+              Email: sales@rb-ware.com
             </a>
           </p>
         </div>

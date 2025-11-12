@@ -23,9 +23,6 @@ export async function initSidebar(currentLang = "ko", onSelect) {
     menu.classList.add(
       "h-full",
       "overflow-y-auto",
-      "scrollbar-thin",
-      "scrollbar-thumb-gray-400",
-      "scrollbar-track-gray-100",
       "pr-2"
     );
 

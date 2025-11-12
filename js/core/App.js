@@ -4,21 +4,56 @@
  * Clean Architecture - Core Layer
  */
 
-import { parseRoute, navigateTo, getCurrentLang, isProductionEnv } from "./Router.js";
+import { parseRoute, navigateTo } from "./Router.js";
+import { getCurrentLang, isProductionEnv } from "../config.js";
 import { initHeader } from "../ui/Header.js";
 import { initSidebar } from "../ui/Sidebar.js";
 import { loadContent } from "../services/ContentService.js";
 import { initSearch } from "../services/SearchService.js";
-import { LANDING_HTML } from "../ui/LandingPage.js";
+import { generateLandingHTML } from "../ui/LandingPage.js";
+
+// Error tracking & Analytics
+import { ErrorHandler, ErrorCategory, ErrorSeverity } from "../utils/ErrorHandler.js";
+import { Logger } from "../utils/Logger.js";
+import { Analytics, EventType } from "../utils/Analytics.js";
+import { initImageOptimization } from "../utils/ImageOptimizer.js";
 
 // Application state
 let currentSlug = null;
+let landingContentCache = {}; // Cache for landing page content
+
+/**
+ * Load landing page content for specific language
+ * @param {string} lang - Language code (ko, en, etc.)
+ */
+async function loadLandingContent(lang) {
+  if (landingContentCache[lang]) {
+    return landingContentCache[lang];
+  }
+
+  try {
+    const res = await fetch(`./content/landing/${lang}.json`, { cache: "no-store" });
+    if (!res.ok) {
+      throw new Error(`Landing content not found for language: ${lang}`);
+    }
+    const content = await res.json();
+    landingContentCache[lang] = content;
+    return content;
+  } catch (err) {
+    console.error("Failed to load landing content:", err);
+    // Fallback to English
+    if (lang !== "en") {
+      return loadLandingContent("en");
+    }
+    throw err;
+  }
+}
 
 /**
  * Show landing page
  * Responsibility: Layout structure only
  */
-function showLanding() {
+async function showLanding() {
   const docContent = document.getElementById("docContent");
   const sidebar = document.getElementById("sidebar");
   const contentArea = document.getElementById("contentArea");
@@ -36,8 +71,10 @@ function showLanding() {
     contentArea.className = "w-full bg-white";
   }
 
-  // Render landing content
-  docContent.innerHTML = LANDING_HTML;
+  // Load and render landing content with current language
+  const currentLang = getCurrentLang();
+  const content = await loadLandingContent(currentLang);
+  docContent.innerHTML = generateLandingHTML(content);
 
   // Remove overlay if exists
   removeOverlay();
@@ -82,16 +119,33 @@ async function ensureSidebarInitialized(lang) {
  * Handle navigation between pages
  */
 async function handleNavigation(lang, slug) {
-  // Update state
-  localStorage.setItem("lang", lang);
-  currentSlug = slug;
+  try {
+    // Update state
+    const previousSlug = currentSlug;
+    localStorage.setItem("lang", lang);
+    currentSlug = slug;
 
-  if (slug) {
-    await ensureSidebarInitialized(lang);
-    showDocumentPage();
-    loadContent(slug, lang);
-  } else {
-    showLanding();
+    // Track navigation
+    if (previousSlug !== slug) {
+      Analytics.trackNavigation(previousSlug || '/', slug || '/');
+    }
+
+    if (slug) {
+      await ensureSidebarInitialized(lang);
+      showDocumentPage();
+      loadContent(slug, lang);
+    } else {
+      showLanding();
+    }
+
+    Logger.debug(`Navigate to: ${slug || 'landing'} (${lang})`);
+  } catch (error) {
+    ErrorHandler.capture(error, {
+      category: ErrorCategory.NAVIGATION,
+      severity: ErrorSeverity.HIGH,
+      context: { lang, slug },
+      showUser: true
+    });
   }
 }
 
@@ -99,24 +153,50 @@ async function handleNavigation(lang, slug) {
  * Initialize and start the application
  */
 export async function startApp() {
-  // Initialize header
-  await initHeader();
+  try {
+    // Initialize error tracking & analytics
+    ErrorHandler.init();
+    Analytics.init();
 
-  // Initialize search
-  await initSearch(getCurrentLang());
+    Logger.info('🚀 Application starting...');
 
-  // Language switcher
-  setupLanguageSwitcher();
+    // Initialize header
+    await initHeader();
 
-  // Route change handlers
-  setupRouteHandlers();
+    // Initialize search
+    await initSearch(getCurrentLang());
 
-  // Initial page load
-  const initialRoute = parseRoute();
-  await handleNavigation(initialRoute.lang, initialRoute.slug);
+    // Language switcher
+    setupLanguageSwitcher();
 
-  // Mobile sidebar toggle
-  setupMobileSidebarToggle();
+    // Route change handlers
+    setupRouteHandlers();
+
+    // Initial page load
+    const initialRoute = parseRoute();
+    await handleNavigation(initialRoute.lang, initialRoute.slug);
+
+    // Track initial page view
+    Analytics.trackPageView(initialRoute.slug || '/');
+
+    // Mobile sidebar toggle
+    setupMobileSidebarToggle();
+
+    // Initialize image optimization
+    initImageOptimization();
+
+    Logger.info('✅ Application started successfully');
+  } catch (error) {
+    // Critical error - app failed to start
+    ErrorHandler.capture(error, {
+      category: ErrorCategory.UNKNOWN,
+      severity: ErrorSeverity.CRITICAL,
+      context: { location: 'startApp' },
+      showUser: true
+    });
+
+    Logger.error('❌ Application failed to start', error);
+  }
 }
 
 /**
@@ -126,17 +206,27 @@ function setupLanguageSwitcher() {
   const langSelect = document.getElementById("langSelect");
   if (!langSelect) return;
 
-  langSelect.value = getCurrentLang();
+  const currentLang = getCurrentLang();
+  langSelect.value = currentLang;
+
   langSelect.addEventListener("change", async (e) => {
     const newLang = e.target.value;
+    const oldLang = currentLang;
 
-    // Re-initialize sidebar with new language if on document page
+    // Track language change
+    Analytics.trackLanguageChange(oldLang, newLang);
+    Logger.info(`Language changed: ${oldLang} → ${newLang}`);
+
     if (currentSlug) {
+      // Document page: re-initialize sidebar with new language
       const sidebarMenu = document.getElementById("sidebarMenu");
       if (sidebarMenu) {
         sidebarMenu.innerHTML = ""; // Clear existing sidebar
       }
       await handleNavigation(newLang, currentSlug);
+    } else {
+      // Landing page: reload with new language
+      await handleNavigation(newLang, null);
     }
   });
 }

@@ -2,13 +2,19 @@
  * RBWare Docs - Unified Search (Desktop + Mobile)
  */
 import { loadContent } from "./ContentService.js";
+import { CONFIG, sanitizeHTML } from "../config.js";
+import { Analytics } from "../utils/Analytics.js";
+import { Logger } from "../utils/Logger.js";
 
 let indexCache = [];
 let currentLang = "ko";
 
 export async function initSearch(lang = "ko") {
   currentLang = lang;
-  const res = await fetch("./search_index.json", { cache: "no-store" });
+  const searchIndexUrl = CONFIG.cache.bustQueryParam
+    ? `${CONFIG.paths.searchIndex}?t=${Date.now()}`
+    : CONFIG.paths.searchIndex;
+  const res = await fetch(searchIndexUrl, { cache: "no-store" });
   indexCache = await res.json();
 
   const desktopInput = document.getElementById("searchInput");
@@ -31,6 +37,10 @@ export async function initSearch(lang = "ko") {
           item.desc.toLowerCase().includes(q)
       )
       .slice(0, 5);
+
+    // Track search
+    Analytics.trackSearch(q, filtered.length);
+    Logger.debug(`Search: "${q}" → ${filtered.length} results`);
 
     resultsBox.innerHTML =
       filtered.length === 0
@@ -76,7 +86,20 @@ export async function initSearch(lang = "ko") {
   });
 }
 
+/**
+ * Highlight search query in text with XSS protection
+ * @param {string} text - Text to highlight
+ * @param {string} q - Query string
+ * @returns {string} HTML with highlighted text
+ */
 function highlight(text, q) {
-  const regex = new RegExp(`(${q})`, "gi");
-  return text.replace(regex, `<mark class='bg-yellow-200'>$1</mark>`);
+  // Sanitize input first
+  const safeText = sanitizeHTML(text);
+  const safeQuery = sanitizeHTML(q);
+
+  // Escape regex special characters
+  const escapedQuery = safeQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(`(${escapedQuery})`, "gi");
+
+  return safeText.replace(regex, `<mark class='bg-yellow-200'>$1</mark>`);
 }

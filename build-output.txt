@@ -1,0 +1,37 @@
+
+> rbware-docs-platform@1.0.0 build
+> NODE_ENV=production vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 19 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                 10.05 kB │ gzip:  2.43 kB
+dist/assets/main-NWTPIzYj.css    1.83 kB │ gzip:  0.65 kB
+dist/assets/utils-TxSy2u4J.js   11.13 kB │ gzip:  4.34 kB
+dist/assets/main-RKMTv9FH.js    25.83 kB │ gzip:  7.52 kB
+dist/assets/vendor-BEdoj_Uh.js  34.95 kB │ gzip: 10.66 kB
+✓ built in 315ms
+
+✨ [vite-plugin-imagemin]- compressed image resource successfully: 
+
+
+
+✨ [vite-plugin-compression]:algorithm=gzip - compressed file successfully: 
+dist//Users/rbware001/Workspace/docs-platform/assets/main-NWTPIzYj.css.gz    1.78kb / gzip: 0.64kb
+dist//Users/rbware001/Workspace/docs-platform/index.html.gz                  9.83kb / gzip: 2.35kb
+dist//Users/rbware001/Workspace/docs-platform/assets/utils-TxSy2u4J.js.gz    11.03kb / gzip: 4.23kb
+dist//Users/rbware001/Workspace/docs-platform/assets/main-RKMTv9FH.js.gz     25.28kb / gzip: 7.31kb
+dist//Users/rbware001/Workspace/docs-platform/assets/vendor-BEdoj_Uh.js.gz   34.13kb / gzip: 10.39kb
+
+
+
+✨ [vite-plugin-compression]:algorithm=brotliCompress - compressed file successfully: 
+dist//Users/rbware001/Workspace/docs-platform/assets/utils-TxSy2u4J.js.br    11.03kb / brotliCompress: 3.54kb
+dist//Users/rbware001/Workspace/docs-platform/index.html.br                  9.83kb / brotliCompress: 1.92kb
+dist//Users/rbware001/Workspace/docs-platform/assets/main-NWTPIzYj.css.br    1.78kb / brotliCompress: 0.51kb
+dist//Users/rbware001/Workspace/docs-platform/assets/main-RKMTv9FH.js.br     25.28kb / brotliCompress: 6.26kb
+dist//Users/rbware001/Workspace/docs-platform/assets/vendor-BEdoj_Uh.js.br   34.13kb / brotliCompress: 9.54kb
+
+

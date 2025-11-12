@@ -1,4 +1,10 @@
-export const LANDING_HTML = `
+/**
+ * Generate landing page HTML with i18n support
+ * @param {Object} content - Language-specific content object
+ * @returns {string} HTML string
+ */
+export function generateLandingHTML(content) {
+  return `
 <!-- Hero Section -->
 <div class="relative overflow-hidden bg-gradient-to-br from-[#071B3C] via-[#0a2347] to-[#1a3a5c] min-h-[60vh] flex items-center">
   <!-- Animated background pattern -->
@@ -11,16 +17,16 @@ export const LANDING_HTML = `
   <div class="relative max-w-6xl mx-auto px-6 py-20 w-full">
     <div class="text-center">
       <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-        Welcome to<br/>
+        ${content.hero.title.line1}<br/>
         <span class="bg-gradient-to-r from-[#ff2e2e] to-[#ff6b6b] bg-clip-text text-transparent">
-          RBWare Tech Docs
+          ${content.hero.title.line2}
         </span>
       </h1>
 
       <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed"><br>
-        <b>Simplifying Welding Automation. Empowering Smart Fabrication.</b>
+        <b>${content.hero.subtitle}</b>
         <br/>
-        Collaborative robots meet intelligent software. The easiest way to achieve professional welding and grinding.
+        ${content.hero.description}
       </p>
 
       <!-- CTA Buttons -->
@@ -31,7 +37,7 @@ export const LANDING_HTML = `
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
-            RB-X Manual
+            ${content.hero.buttons.manual}
           </span>
         </a>
 
@@ -41,7 +47,7 @@ export const LANDING_HTML = `
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
             </svg>
-            Download
+            ${content.hero.buttons.download}
           </span>
         </a>
       </div>
@@ -60,8 +66,8 @@ export const LANDING_HTML = `
 <div class="bg-white py-16">
   <div class="max-w-6xl mx-auto px-6">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-900 mb-3">Why RB-X?</h2>
-      <p class="text-gray-600">Simple yet powerful solution for welding & grinding automation</p>
+      <h2 class="text-3xl font-bold text-gray-900 mb-3">${content.features.title}</h2>
+      <p class="text-gray-600">${content.features.subtitle}</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -71,8 +77,8 @@ export const LANDING_HTML = `
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-2">Easy to Use</h3>
-        <p class="text-gray-600">Intuitive interface designed for quick setup and operation without complex programming.</p>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">${content.features.items[0].title}</h3>
+        <p class="text-gray-600">${content.features.items[0].description}</p>
       </div>
 
       <div class="text-center">
@@ -81,8 +87,8 @@ export const LANDING_HTML = `
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-2">Fast & Efficient</h3>
-        <p class="text-gray-600">Reduce setup time and increase productivity with streamlined workflows.</p>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">${content.features.items[1].title}</h3>
+        <p class="text-gray-600">${content.features.items[1].description}</p>
       </div>
 
       <div class="text-center">
@@ -91,8 +97,8 @@ export const LANDING_HTML = `
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-2">Proven Reliability</h3>
-        <p class="text-gray-600">Field-tested stability for industrial welding and grinding applications.</p>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">${content.features.items[2].title}</h3>
+        <p class="text-gray-600">${content.features.items[2].description}</p>
       </div>
     </div>
   </div>
@@ -102,8 +108,8 @@ export const LANDING_HTML = `
 <div class="bg-gradient-to-br from-gray-50 to-gray-100 py-16">
   <div class="max-w-6xl mx-auto px-6">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-900 mb-3">Related Resources</h2>
-      <p class="text-gray-600">Additional resources and support</p>
+      <h2 class="text-3xl font-bold text-gray-900 mb-3">${content.resources.title}</h2>
+      <p class="text-gray-600">${content.resources.subtitle}</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -117,13 +123,13 @@ export const LANDING_HTML = `
         </div>
         <div class="ml-4 flex-1">
           <h3 class="text-lg font-bold text-gray-900 group-hover:text-[#ff2e2e] transition-colors mb-2">
-            RBWare Official Website
+            ${content.resources.items[0].title}
             <svg class="inline-block w-4 h-4 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
             </svg>
           </h3>
-          <p class="text-gray-600 text-sm">Visit our main website for product information and company news.</p>
-          <p class="text-xs text-gray-500 mt-2">www.rb-ware.com</p>
+          <p class="text-gray-600 text-sm">${content.resources.items[0].description}</p>
+          <p class="text-xs text-gray-500 mt-2">${content.resources.items[0].url}</p>
         </div>
       </a>
 
@@ -137,13 +143,13 @@ export const LANDING_HTML = `
         </div>
         <div class="ml-4 flex-1">
           <h3 class="text-lg font-bold text-gray-900 group-hover:text-[#ff2e2e] transition-colors mb-2">
-            Rainbow Robotics Technical Docs
+            ${content.resources.items[1].title}
             <svg class="inline-block w-4 h-4 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
             </svg>
           </h3>
-          <p class="text-gray-600 text-sm">Comprehensive technical documentation for RB Cobot series.</p>
-          <p class="text-xs text-gray-500 mt-2">rainbowrobotics.github.io</p>
+          <p class="text-gray-600 text-sm">${content.resources.items[1].description}</p>
+          <p class="text-xs text-gray-500 mt-2">${content.resources.items[1].url}</p>
         </div>
       </a>
 
@@ -157,10 +163,10 @@ export const LANDING_HTML = `
         </div>
         <div class="ml-4 flex-1">
           <h3 class="text-lg font-bold text-gray-900 group-hover:text-[#ff2e2e] transition-colors mb-2">
-            Email Support
+            ${content.resources.items[2].title}
           </h3>
-          <p class="text-gray-600 text-sm">Get help from our technical support team.</p>
-          <p class="text-xs text-gray-500 mt-2">juho.park@rbware.co.kr</p>
+          <p class="text-gray-600 text-sm">${content.resources.items[2].description}</p>
+          <p class="text-xs text-gray-500 mt-2">${content.resources.items[2].url}</p>
         </div>
       </a>
 
@@ -174,10 +180,10 @@ export const LANDING_HTML = `
         </div>
         <div class="ml-4 flex-1">
           <h3 class="text-lg font-bold text-gray-900 group-hover:text-[#ff2e2e] transition-colors mb-2">
-            Getting Started Guide
+            ${content.resources.items[3].title}
           </h3>
-          <p class="text-gray-600 text-sm">Step-by-step installation and setup instructions.</p>
-          <p class="text-xs text-gray-500 mt-2">Begin your journey →</p>
+          <p class="text-gray-600 text-sm">${content.resources.items[3].description}</p>
+          <p class="text-xs text-gray-500 mt-2">${content.resources.items[3].url}</p>
         </div>
       </a>
     </div>
@@ -190,20 +196,19 @@ export const LANDING_HTML = `
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
       <!-- Company Info -->
       <div>
-        <h4 class="text-white font-semibold text-base mb-3">RBWare</h4>
+        <h4 class="text-white font-semibold text-base mb-3">${content.footer.companyTitle}</h4>
         <p class="text-sm text-gray-400 leading-relaxed mb-3">
-          Collaborative robot solutions for welding and grinding automation. 
-          <br>Easy-to-use software for professional applications.
+          ${content.footer.companyDescription}
         </p>
       </div>
 
       <!-- Contact & Social -->
       <div>
-        <h4 class="text-white font-semibold text-base mb-3">Contact</h4>
+        <h4 class="text-white font-semibold text-base mb-3">${content.footer.contactTitle}</h4>
         <div class="space-y-2 text-sm mb-4">
           <p class="text-gray-400">
             <a href="mailto:sales@rb-ware.com" class="hover:text-[#ff2e2e] transition-colors">
-              Email: sales@rb-ware.com
+              ${content.footer.email}
             </a>
           </p>
         </div>
@@ -227,9 +232,10 @@ export const LANDING_HTML = `
     <!-- Bottom Bar -->
     <div class="border-t border-gray-700 pt-6 text-center">
       <p class="text-sm text-gray-400">
-        © 2025 RBWare Co., Ltd. All rights reserved.
+        ${content.footer.copyright}
       </p>
     </div>
   </div>
 </footer>
 `;
+}

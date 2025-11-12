@@ -6,15 +6,21 @@
  * - Smooth scrollbar for long menus
  */
 
+import { CONFIG } from "../config.js";
+import { Logger } from "../utils/Logger.js";
+import { ErrorHandler, ErrorCategory, ErrorSeverity } from "../utils/ErrorHandler.js";
+
 export async function initSidebar(currentLang = "ko", onSelect) {
-  const isProduction = window.location.hostname.includes('github.io');
   try {
-    const res = await fetch("./manifest.json", { cache: "no-store" });
+    const manifestUrl = CONFIG.cache.bustQueryParam
+      ? `${CONFIG.paths.manifest}?t=${Date.now()}`
+      : CONFIG.paths.manifest;
+    const res = await fetch(manifestUrl, { cache: "no-store" });
     const data = await res.json();
 
     const menu = document.getElementById("sidebarMenu");
     if (!menu) {
-      console.error("❌ sidebarMenu element not found.");
+      Logger.error("sidebarMenu element not found");
       return;
     }
 
@@ -51,8 +57,9 @@ export async function initSidebar(currentLang = "ko", onSelect) {
           const link = document.createElement("a");
 
           // Hybrid routing: hash for local, clean URL for production
-          if (isProduction) {
-            link.href = `/docs-platform/${currentLang}/${item.slug}`;
+          if (CONFIG.routes.useCleanUrls) {
+            const repoPath = CONFIG.basePath.replace(/\/$/, '');
+            link.href = `${repoPath}/${currentLang}/${item.slug}`;
           } else {
             link.href = `#/${item.slug}`;
           }
@@ -109,8 +116,13 @@ export async function initSidebar(currentLang = "ko", onSelect) {
         menu.appendChild(catWrapper);
       });
 
-    console.log("✅ Sidebar initialized (default expanded, collapsible ready).");
+    Logger.info("Sidebar initialized");
   } catch (err) {
-    console.error("Sidebar init failed:", err);
+    ErrorHandler.capture(err, {
+      category: ErrorCategory.UI,
+      severity: ErrorSeverity.HIGH,
+      context: { lang: currentLang }
+    });
+    Logger.error("Sidebar initialization failed", err);
   }
 }

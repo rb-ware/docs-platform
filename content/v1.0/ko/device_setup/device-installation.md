@@ -58,7 +58,7 @@ RB-X 시스템을 설치하고 네트워크를 구성하는 방법을 설명합�
 
 1. **RB-X APK 다운로드 및 설치**
    - 아래 링크에서 최신 RB-X 설치 파일을 다운로드하세요.  
-     👉 [**RB-X APK 다운로드 링크**](https://rbweld-my.sharepoint.com/:f:/g/personal/juho_park_rb-ware_com/Evhj4zga8jNAtzfYnTVzntQBRALG4VEs5vN7Qd5BWF4dGA?e=G2OFXp)
+     👉 [**RB-X APK 다운로드 링크**](https://rbweld-my.sharepoint.com/:f:/g/personal/juho_park_rb-ware_com/Evhj4zga8jNAtzfYnTVzntQBnO3AnarRJ9Z9PWUuBQvQ0Q)
    - 다운로드 후, 태블릿에서 `rbx_v.최신숫자.apk` 파일을 눌러 설치합니다.  
      *(필요 시 “알 수 없는 앱 허용”을 활성화)*
 

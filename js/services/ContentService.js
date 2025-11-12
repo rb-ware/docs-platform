@@ -3,11 +3,10 @@
  * Fetches and renders markdown files dynamically using Marked.js
  * RBWare Docs — version + language + category 기반 Markdown 렌더링
  */
-import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
-import { getAssetPath } from "../utils/pathHelper.js";
-
-// 현재 사용 중인 문서 버전 (필요하면 나중에 manifest.json에서 가져오도록 변경 가능)
-const DOC_VERSION = "v1.0";
+import { marked } from "marked";
+import { getAssetPath, CONFIG, isValidSlug, buildDocumentUrl } from "../config.js";
+import { ErrorHandler, ErrorCategory, ErrorSeverity } from "../utils/ErrorHandler.js";
+import { Logger } from "../utils/Logger.js";
 
 /**
  * slug  예시: "extension/jump", "setup/welding-set"
@@ -18,15 +17,41 @@ export async function loadContent(slug, lang = "ko") {
 
   if (!doc) return;
 
+  // Security: Validate slug to prevent path traversal
+  if (!isValidSlug(slug)) {
+    const error = new Error(`Invalid slug: ${slug}`);
+    ErrorHandler.capture(error, {
+      category: ErrorCategory.CONTENT,
+      severity: ErrorSeverity.MEDIUM,
+      context: { slug, lang }
+    });
+
+    Logger.error(`Invalid slug: "${slug}"`);
+
+    doc.innerHTML = `
+      <p class="text-red-500 text-sm">
+        Invalid document path.<br />
+        <code>Invalid slug format</code>
+      </p>
+    `;
+    return;
+  }
+
+  // Validate language
+  if (!CONFIG.languages.supported.includes(lang)) {
+    Logger.warn(`Invalid language: "${lang}", using default`);
+    lang = CONFIG.languages.default;
+  }
+
   // Set prose styling (don't touch contentArea - that's layout's responsibility)
   doc.className = "prose w-full max-w-4xl mx-auto px-6 md:px-12 py-8";
 
   // 실제 파일 경로: ./content/v1.0/ko/extension/jump.md
-  const basePath = `./content/${DOC_VERSION}/${lang}/${slug}.md`;
-  const url = `${basePath}?t=${Date.now()}`; // 캐시 무효화용 쿼리 추가
+  const basePath = `${CONFIG.paths.content}/${CONFIG.docVersion}/${lang}/${slug}.md`;
+  const url = buildDocumentUrl(basePath);
 
   try {
-    console.log(`📄 Loading doc: ${url}`);
+    Logger.info(`Loading doc: ${slug} (${lang})`);
 
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok) {
@@ -59,11 +84,20 @@ export async function loadContent(slug, lang = "ko") {
       contentArea.scrollTo({ top: 0, behavior: "smooth" });
     }
   } catch (err) {
-    console.error("loadContent error:", err);
+    // Error tracking
+    ErrorHandler.capture(err, {
+      category: ErrorCategory.CONTENT,
+      severity: ErrorSeverity.HIGH,
+      context: { slug, lang, url },
+      showUser: true
+    });
+
+    Logger.error('Failed to load content', { slug, lang, error: err.message });
+
     doc.innerHTML = `
       <p class="text-gray-500 text-sm">
         문서를 불러오는 중 오류가 발생했습니다.<br />
-        <code>${DOC_VERSION}/${lang}/${slug}.md</code>
+        <code>${CONFIG.docVersion}/${lang}/${slug}.md</code>
       </p>
     `;
   }

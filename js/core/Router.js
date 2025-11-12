@@ -4,23 +4,22 @@
  * Clean Architecture - Core Layer
  */
 
-// Check if we're on GitHub Pages
-const isProduction = window.location.hostname.includes('github.io');
+import { CONFIG, getCurrentLang } from "../config.js";
 
 /**
  * Parse current route from URL
  * @returns {{lang: string, slug: string}}
  */
 export function parseRoute() {
-  const currentLang = localStorage.getItem("lang") || "ko";
+  const currentLang = getCurrentLang();
 
-  if (isProduction) {
+  if (CONFIG.routes.useCleanUrls) {
     // Production: Clean URLs like /docs-platform/ko/setup/system-set
     let pathname = window.location.pathname;
-    pathname = pathname.replace('/docs-platform/', '').replace(/^\/|\/$/g, '');
+    pathname = pathname.replace(CONFIG.basePath, '').replace(/^\/|\/$/g, '');
     const parts = pathname.split('/').filter(Boolean);
 
-    if (parts.length > 0 && ['ko', 'en'].includes(parts[0])) {
+    if (parts.length > 0 && CONFIG.languages.supported.includes(parts[0])) {
       return {
         lang: parts[0],
         slug: parts.slice(1).join('/')
@@ -41,11 +40,18 @@ export function parseRoute() {
  * @param {Function} onNavigate - Callback function
  */
 export function navigateTo(lang, slug, onNavigate) {
+  // Validate language
+  if (!CONFIG.languages.supported.includes(lang)) {
+    console.warn(`Invalid language: ${lang}, using default`);
+    lang = CONFIG.languages.default;
+  }
+
   localStorage.setItem("lang", lang);
 
-  if (isProduction) {
+  if (CONFIG.routes.useCleanUrls) {
     // Production: Use clean URLs
-    const path = slug ? `/docs-platform/${lang}/${slug}` : `/docs-platform/${lang}`;
+    const repoPath = CONFIG.basePath.replace(/\/$/, ''); // Remove trailing slash
+    const path = slug ? `${repoPath}/${lang}/${slug}` : `${repoPath}/${lang}`;
     window.history.pushState({ lang, slug }, '', path);
   } else {
     // Local dev: Use hash routing
@@ -55,20 +61,4 @@ export function navigateTo(lang, slug, onNavigate) {
   if (onNavigate) {
     onNavigate(lang, slug);
   }
-}
-
-/**
- * Get current language from storage
- * @returns {string}
- */
-export function getCurrentLang() {
-  return localStorage.getItem("lang") || "ko";
-}
-
-/**
- * Check if running in production
- * @returns {boolean}
- */
-export function isProductionEnv() {
-  return isProduction;
 }

@@ -4,6 +4,8 @@
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { loadContent } from '../js/services/ContentService.js';
+import { Logger } from '../js/utils/Logger.js';
+import { ErrorHandler } from '../js/utils/ErrorHandler.js';
 
 describe('ContentService Module', () => {
   let mockDocElement;
@@ -23,8 +25,11 @@ describe('ContentService Module', () => {
     // Reset mocks
     vi.clearAllMocks();
     global.fetch = vi.fn();
-    console.error = vi.fn();
-    console.log = vi.fn();
+
+    // Mock Logger and ErrorHandler
+    vi.spyOn(Logger, 'error').mockImplementation(() => {});
+    vi.spyOn(Logger, 'info').mockImplementation(() => {});
+    vi.spyOn(ErrorHandler, 'capture').mockImplementation(() => {});
   });
 
   describe('loadContent()', () => {
@@ -32,7 +37,7 @@ describe('ContentService Module', () => {
       await loadContent('../../../etc/passwd', 'ko');
 
       expect(mockDocElement.innerHTML).toContain('Invalid document path');
-      expect(console.error).toHaveBeenCalledWith(
+      expect(Logger.error).toHaveBeenCalledWith(
         expect.stringContaining('Invalid slug')
       );
     });
@@ -67,7 +72,7 @@ describe('ContentService Module', () => {
       await loadContent('nonexistent/doc', 'ko');
 
       expect(mockDocElement.innerHTML).toContain('문서를 불러오는 중 오류가 발생했습니다');
-      expect(console.error).toHaveBeenCalled();
+      expect(Logger.error).toHaveBeenCalled();
     });
 
     it('should validate and fix invalid language', async () => {
@@ -164,10 +169,8 @@ describe('ContentService Module', () => {
       await loadContent('setup/guide', 'ko');
 
       expect(mockDocElement.innerHTML).toContain('문서를 불러오는 중 오류가 발생했습니다');
-      expect(console.error).toHaveBeenCalledWith(
-        'loadContent error:',
-        expect.any(Error)
-      );
+      expect(Logger.error).toHaveBeenCalled();
+      expect(ErrorHandler.capture).toHaveBeenCalled();
     });
   });
 });

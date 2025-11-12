@@ -1,4 +1,4 @@
-import { getAssetPath } from "./utils.js";
+import { getAssetPath } from "../utils/pathHelper.js";
 
 export async function initHeader() {
   const headerContainer = document.getElementById("header");

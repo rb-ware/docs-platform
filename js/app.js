@@ -58,15 +58,27 @@ function navigateTo(lang, slug) {
   }
 
   if (slug) {
+    showDocumentPage();
     loadContent(slug, lang);
+  } else {
+    showLanding();
   }
 }
 
 // Initialize app
 await initHeader();
-await initSidebar(currentLang, (slug) => {
-  navigateTo(getCurrentLang(), slug);
-});
+
+// Determine initial page type
+const initialRoute = parseRoute();
+const isDocumentPage = !!initialRoute.slug;
+
+// Only initialize sidebar if we're on a document page
+if (isDocumentPage) {
+  await initSidebar(currentLang, (slug) => {
+    navigateTo(getCurrentLang(), slug);
+  });
+}
+
 await initSearch(currentLang);
 
 // Language switcher
@@ -75,9 +87,10 @@ if (langSelect) {
   langSelect.value = currentLang;
   langSelect.addEventListener("change", async (e) => {
     const newLang = e.target.value;
-    await initSidebar(newLang, (slug) => navigateTo(newLang, slug));
 
+    // Only re-initialize sidebar if we're on a document page
     if (currentSlug) {
+      await initSidebar(newLang, (slug) => navigateTo(newLang, slug));
       navigateTo(newLang, currentSlug);
     }
   });
@@ -91,7 +104,12 @@ if (isProduction) {
     currentLang = route.lang;
     currentSlug = route.slug;
     localStorage.setItem("lang", route.lang);
-    if (route.slug) loadContent(route.slug, route.lang);
+    if (route.slug) {
+      showDocumentPage();
+      loadContent(route.slug, route.lang);
+    } else {
+      showLanding();
+    }
     if (langSelect) langSelect.value = route.lang;
   });
 } else {
@@ -99,25 +117,68 @@ if (isProduction) {
   window.addEventListener("hashchange", () => {
     const route = parseRoute();
     currentSlug = route.slug;
-    if (route.slug) loadContent(route.slug, getCurrentLang());
+    if (route.slug) {
+      showDocumentPage();
+      loadContent(route.slug, getCurrentLang());
+    } else {
+      showLanding();
+    }
   });
 }
 
 // Show landing page
 function showLanding() {
   const docContent = document.getElementById("docContent");
+  const sidebar = document.getElementById("sidebar");
+  const contentArea = document.getElementById("contentArea");
+
   if (!docContent) return;
 
+  // Completely hide sidebar (prevent flashing)
+  if (sidebar) {
+    sidebar.classList.add("hidden");
+  }
+
+  // Set landing page layout
+  if (contentArea) {
+    contentArea.className = "w-full bg-white";
+  }
+
+  // Render landing content
   docContent.innerHTML = LANDING_HTML;
 }
 
-// Initial page load
-const initialRoute = parseRoute();
-if (initialRoute.slug) {
-  // Has route: show document
+// Show document page with sidebar
+async function showDocumentPage() {
+  const sidebar = document.getElementById("sidebar");
+  const contentArea = document.getElementById("contentArea");
+
+  // Initialize sidebar if not already initialized
+  const sidebarMenu = document.getElementById("sidebarMenu");
+  if (sidebarMenu && sidebarMenu.children.length === 0) {
+    await initSidebar(getCurrentLang(), (slug) => {
+      navigateTo(getCurrentLang(), slug);
+    });
+  }
+
+  // Show sidebar
+  if (sidebar) {
+    sidebar.classList.remove("hidden");
+  }
+
+  // Set document page layout
+  if (contentArea) {
+    contentArea.className = "flex-1 has-sidebar";
+  }
+}
+
+// Initial page load (route already parsed above)
+if (isDocumentPage) {
+  // Has route: show document page
   currentLang = initialRoute.lang;
   currentSlug = initialRoute.slug;
   localStorage.setItem("lang", initialRoute.lang);
+  showDocumentPage();
   loadContent(initialRoute.slug, initialRoute.lang);
   if (langSelect) langSelect.value = initialRoute.lang;
 } else {

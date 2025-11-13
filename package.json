@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "NODE_ENV=production vite build",
-    "build:analyze": "NODE_ENV=production vite build --mode analyze",
+    "build": "vite build --mode production",
+    "build:ci": "vite build --mode development",
+    "build:analyze": "vite build --mode analyze",
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",

@@ -57,14 +57,14 @@ export default defineConfig(({ mode }) => ({
       brotliSize: true
     })
   ].filter(Boolean),
-  // Base path for GitHub Pages
-  base: process.env.NODE_ENV === 'production' ? '/docs-platform/' : '/',
+  // Base path for GitHub Pages (production만 사용)
+  base: mode === 'production' ? '/docs-platform/' : '/',
 
   // Build configuration
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: process.env.NODE_ENV !== 'production', // Production에서는 sourcemap 제거
+    sourcemap: mode !== 'production', // Production에서는 sourcemap 제거
 
     rollupOptions: {
       input: {
@@ -87,9 +87,9 @@ export default defineConfig(({ mode }) => ({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: process.env.NODE_ENV === 'production',
+        drop_console: mode === 'production',
         drop_debugger: true,
-        pure_funcs: process.env.NODE_ENV === 'production' ? ['console.log', 'console.debug'] : [],
+        pure_funcs: mode === 'production' ? ['console.log', 'console.debug'] : [],
         passes: 2, // Multiple passes for better compression
       },
       mangle: {

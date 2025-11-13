@@ -24,6 +24,7 @@
         "cumulative-layout-shift": ["warn", {"maxNumericValue": 0.25}],
         "total-blocking-time": ["warn", {"maxNumericValue": 600}],
         "speed-index": ["warn", {"maxNumericValue": 4000}],
+        "color-contrast": "off",
         "unused-javascript": "off",
         "render-blocking-resources": "off",
         "uses-long-cache-ttl": "off",

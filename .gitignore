@@ -41,3 +41,4 @@ pnpm-debug.log*
 # OS files
 Thumbs.db
 desktop.ini
+build-output.txt

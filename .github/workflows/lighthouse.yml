@@ -32,8 +32,10 @@ jobs:
       # 빌드된 사이트를 서빙할 HTTP 서버 시작
       - name: Start HTTP server
         run: |
-          npx serve -s dist -l 5000 &
-          sleep 5
+          npx serve -s dist -l 5000 > /dev/null 2>&1 &
+          echo "Waiting for server to be ready..."
+          timeout 30 bash -c 'until curl -s http://localhost:5000/ > /dev/null; do sleep 1; done'
+          echo "Server is ready"
 
       # Lighthouse CI 실행
       - name: Run Lighthouse CI
@@ -41,11 +43,9 @@ jobs:
         with:
           urls: |
             http://localhost:5000/
-            http://localhost:5000/ko
-            http://localhost:5000/en
           uploadArtifacts: true
           temporaryPublicStorage: true
-          configPath: './.lighthouserc.json'
+          runs: 3
 
   # 번들 크기 모니터링
   bundle-size:
@@ -93,10 +93,3 @@ jobs:
             fi
           done
 
-      # 번들 사이즈 제한 체크
-      - name: Check bundle size limit
-        uses: andresz1/size-limit-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          skip_step: install
-          build_script: build

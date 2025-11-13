@@ -12,10 +12,10 @@ permissions:
   pages: write
   id-token: write
 
-# 동시 배포 방지
+# 동시 배포 방지 (이전 배포 취소하고 최신 배포 실행)
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   # 1단계: 빌드
@@ -76,11 +76,16 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 15
 
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 900000
+          error_count: 20
+          reporting_interval: 10000
 
       # 배포 성공 알림
       - name: Deployment success

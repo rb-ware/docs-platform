@@ -4,6 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RBWare Docs Platform</title>
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // GA4 추적 ID 설정 (실제 ID로 교체 필요)
+      gtag('config', 'G-XXXXXXXXXX', {
+        'send_page_view': false // SPA이므로 수동 페이지뷰 추적
+      });
+    </script>
+
     <script>
       // 환경에 따라 base path 동적 설정.
       const isGitHubPages = window.location.hostname.includes('github.io');

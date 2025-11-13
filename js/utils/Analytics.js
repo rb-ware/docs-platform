@@ -84,10 +84,23 @@ class AnalyticsClass {
    * 페이지 뷰 추적
    */
   trackPageView(path) {
+    const pagePath = path || window.location.pathname;
+    const pageTitle = document.title;
+
+    // 자체 분석
     this.track(EventType.PAGE_VIEW, {
-      path: path || window.location.pathname,
-      title: document.title
+      path: pagePath,
+      title: pageTitle
     });
+
+    // Google Analytics 페이지뷰 전송
+    if (typeof gtag === 'function') {
+      gtag('event', 'page_view', {
+        page_path: pagePath,
+        page_title: pageTitle,
+        page_location: window.location.href
+      });
+    }
   }
 
   /**
@@ -105,21 +118,39 @@ class AnalyticsClass {
    * 검색 추적
    */
   trackSearch(query, resultsCount) {
+    // 자체 분석
     this.track(EventType.SEARCH, {
       query: query.toLowerCase(), // 개인정보 제거 (특수문자 등)
       resultsCount,
       hasResults: resultsCount > 0
     });
+
+    // Google Analytics 검색 이벤트
+    if (typeof gtag === 'function') {
+      gtag('event', 'search', {
+        search_term: query,
+        results_count: resultsCount
+      });
+    }
   }
 
   /**
    * 언어 변경 추적
    */
   trackLanguageChange(from, to) {
+    // 자체 분석
     this.track(EventType.LANGUAGE_CHANGE, {
       from,
       to
     });
+
+    // Google Analytics 언어 변경 이벤트
+    if (typeof gtag === 'function') {
+      gtag('event', 'language_change', {
+        previous_language: from,
+        new_language: to
+      });
+    }
   }
 
   /**

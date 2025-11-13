@@ -37,8 +37,8 @@ export const CONFIG = {
 
   // Routes
   routes: {
-    useCleanUrls: isProduction,
-    useHashRouting: !isProduction
+    useCleanUrls: false, // 모든 환경에서 해시 라우팅 사용
+    useHashRouting: true // GitHub Pages SPA 호환성
   },
 
   // Content paths

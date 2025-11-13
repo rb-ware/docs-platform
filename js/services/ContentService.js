@@ -64,8 +64,13 @@ export async function loadContent(slug, lang = "ko") {
     let html = marked.parse(text);
 
     // 환경에 맞게 이미지 경로 동적 변환
-    // 마크다운의 상대 경로 (../../../assets/, ../../assets/, ../assets/, assets/) 처리
+    // 마크다운의 상대/절대 경로 처리
     html = html.replace(/src="(\.\.\/)*assets\//g, () => {
+      return `src="${getAssetPath('assets/')}`;
+    });
+
+    // 절대 경로로 시작하는 경우 (/assets/...)
+    html = html.replace(/src="\/assets\//g, () => {
       return `src="${getAssetPath('assets/')}`;
     });
 

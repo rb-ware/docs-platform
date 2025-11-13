@@ -22,7 +22,7 @@ RB-X 시스템을 설치하고 네트워크를 구성하는 방법을 설명합�
 공유기(Router)에 모든 장비(Robot Control Box, Welder, Mini PC)를 LAN 케이블로 연결합니다.
 
 <div align="left">
-  <img src="/assets/images/install/install1.png" alt="네트워크 구성도" width="50%">
+  <img src="/assets/images/Install/install1.png" alt="네트워크 구성도" width="50%">
 </div>
 
 **LAN 케이블 연결 대상**

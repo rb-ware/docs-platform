@@ -1,7 +1,18 @@
 /**
- * content.js
- * Fetches and renders markdown files dynamically using Marked.js
- * RBWare Docs — version + language + category 기반 Markdown 렌더링
+ * @fileoverview Content loading and rendering service for markdown documentation
+ * @module services/ContentService
+ *
+ * Features:
+ * - Fetches markdown files from content directory
+ * - Renders markdown to HTML using Marked.js
+ * - Dynamic asset path resolution (dev vs production)
+ * - Security: slug validation to prevent path traversal
+ * - Error handling with user-friendly messages
+ *
+ * @requires marked
+ * @requires module:config
+ * @requires module:utils/ErrorHandler
+ * @requires module:utils/Logger
  */
 import { marked } from "marked";
 import { getAssetPath, CONFIG, isValidSlug, buildDocumentUrl } from "../config.js";
@@ -9,8 +20,22 @@ import { ErrorHandler, ErrorCategory, ErrorSeverity } from "../utils/ErrorHandle
 import { Logger } from "../utils/Logger.js";
 
 /**
- * slug  예시: "extension/jump", "setup/welding-set"
- * lang  예시: "ko", "en"
+ * Load and render markdown content into the document area
+ *
+ * @async
+ * @param {string} slug - Document path slug (e.g., "extension/jump", "setup/welding-set")
+ * @param {string} [lang='ko'] - Language code (ko, en)
+ * @returns {Promise<void>}
+ *
+ * @example
+ * // Load Korean version of jump extension documentation
+ * await loadContent('extension/jump', 'ko');
+ *
+ * @example
+ * // Load English version with default language fallback
+ * await loadContent('setup/welding-set');
+ *
+ * @security Validates slug format to prevent path traversal attacks
  */
 export async function loadContent(slug, lang = "ko") {
   const doc = document.getElementById("docContent");

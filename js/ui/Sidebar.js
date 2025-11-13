@@ -1,15 +1,39 @@
 /**
- * sidebar.js
- * -----------------------------------
- * - Default: all categories expanded
- * - Collapsible categories with chevrons (light gray)
- * - Smooth scrollbar for long menus
+ * @fileoverview Sidebar navigation component for documentation platform
+ * @module ui/Sidebar
+ *
+ * Features:
+ * - Dynamic menu generation from manifest.json
+ * - Collapsible category sections (default: expanded)
+ * - Active state highlighting
+ * - Hybrid routing (hash for dev, clean URLs for production)
+ * - Responsive mobile/desktop behavior
+ *
+ * @requires module:config
+ * @requires module:utils/Logger
+ * @requires module:utils/ErrorHandler
  */
 
 import { CONFIG } from "../config.js";
 import { Logger } from "../utils/Logger.js";
 import { ErrorHandler, ErrorCategory, ErrorSeverity } from "../utils/ErrorHandler.js";
 
+/**
+ * Initialize and render the sidebar navigation menu
+ *
+ * @async
+ * @param {string} [currentLang='ko'] - Current language code (ko, en)
+ * @param {Function} onSelect - Callback function when menu item is clicked
+ * @param {string} onSelect.slug - Document slug to navigate to
+ * @returns {Promise<void>}
+ *
+ * @example
+ * await initSidebar('en', (slug) => {
+ *   console.log(`Navigating to: ${slug}`);
+ * });
+ *
+ * @throws {Error} If manifest.json cannot be fetched or parsed
+ */
 export async function initSidebar(currentLang = "ko", onSelect) {
   try {
     const manifestUrl = CONFIG.cache.bustQueryParam

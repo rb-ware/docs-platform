@@ -57,6 +57,7 @@ async function showLanding() {
   const docContent = document.getElementById("docContent");
   const sidebar = document.getElementById("sidebar");
   const contentArea = document.getElementById("contentArea");
+  const menuToggle = document.getElementById("menuToggle");
 
   if (!docContent) return;
 
@@ -64,6 +65,11 @@ async function showLanding() {
   if (sidebar) {
     sidebar.classList.remove("sidebar-visible", "translate-x-0");
     sidebar.classList.add("-translate-x-full");
+  }
+
+  // Hide menu toggle button on landing page
+  if (menuToggle) {
+    menuToggle.classList.add("hidden");
   }
 
   // Landing page layout: full width, no sidebar margin
@@ -87,10 +93,16 @@ async function showLanding() {
 function showDocumentPage() {
   const sidebar = document.getElementById("sidebar");
   const contentArea = document.getElementById("contentArea");
+  const menuToggle = document.getElementById("menuToggle");
 
   // Enable sidebar visibility (desktop: auto-show, mobile: hidden until toggle)
   if (sidebar) {
     sidebar.classList.add("sidebar-visible");
+  }
+
+  // Show menu toggle button on document pages
+  if (menuToggle) {
+    menuToggle.classList.remove("hidden");
   }
 
   // Document page layout: sidebar margin + padding
@@ -271,7 +283,15 @@ function setupMobileSidebarToggle() {
  */
 function toggleSidebar(forceClose = false) {
   const sidebar = document.getElementById("sidebar");
+  const sidebarMenu = document.getElementById("sidebarMenu");
+
   if (!sidebar) return;
+
+  // Prevent opening empty sidebar (landing page or uninitialized)
+  if (!forceClose && (!sidebarMenu || sidebarMenu.children.length === 0)) {
+    Logger.warn("Cannot open sidebar: menu not initialized");
+    return;
+  }
 
   const isOpen = sidebar.classList.contains("translate-x-0");
 

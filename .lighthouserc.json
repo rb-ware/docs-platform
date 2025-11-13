@@ -1,13 +1,16 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "npx serve -s dist -l 5000",
+      "startServerCommand": "npx serve -s dist -l 5000 --no-port-switching",
       "startServerReadyPattern": "Accepting connections",
-      "startServerReadyTimeout": 30000,
+      "startServerReadyTimeout": 45000,
       "url": [
         "http://localhost:5000/"
       ],
-      "numberOfRuns": 3
+      "numberOfRuns": 3,
+      "settings": {
+        "chromeFlags": "--no-sandbox --disable-dev-shm-usage --disable-gpu"
+      }
     },
     "assert": {
       "preset": "lighthouse:recommended",

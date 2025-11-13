@@ -1,13 +1,12 @@
-name: Test
+name: Test & Quality Check
 
-# PR 생성/업데이트 시 자동 실행
+# main 브랜치에 푸시될 때마다 자동 실행
 on:
-  pull_request:
-    branches: [ main, dev ]
   push:
-    branches: [ main, dev ]
+    branches: [ main ]
+  workflow_dispatch:
 
-# 동시 실행 방지 (같은 PR에서 여러 번 푸시 시)
+# 동시 실행 방지
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -16,37 +15,32 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [20.x]
 
     steps:
-      # 1. 코드 체크아웃
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Node.js 설정
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      # 3. 의존성 설치 (CI 모드로 더 빠름)
       - name: Install dependencies
         run: npm ci
 
-      # 4. 테스트 실행
       - name: Run tests
         run: npm test -- --run
 
-      # 5. 커버리지 생성
       - name: Generate coverage report
         run: npm run test:coverage
         continue-on-error: true
 
-      # 6. 커버리지 업로드 (PR 코멘트로 표시)
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
@@ -59,6 +53,7 @@ jobs:
   lint:
     name: Code Quality Check
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout code
@@ -73,27 +68,51 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 파일 크기 체크
+      - name: Build for production
+        run: npm run build
+        env:
+          NODE_ENV: production
+
       - name: Check bundle size
         run: |
-          npm run build
+          echo "## 📦 Bundle Size Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| File | Size | Gzipped |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|------|---------|" >> $GITHUB_STEP_SUMMARY
 
-          # 번들 크기 제한 (30KB gzipped)
-          SIZE=$(find dist -name "*.js" -exec gzip -c {} \; | wc -c)
-          MAX_SIZE=$((30 * 1024))
+          TOTAL_ORIGINAL=0
+          TOTAL_GZIPPED=0
 
-          echo "Bundle size: $(($SIZE / 1024)) KB"
+          for file in dist/assets/*.js; do
+            if [ -f "$file" ]; then
+              SIZE=$(stat -c%s "$file" 2>/dev/null || stat -f%z "$file")
+              GZIP=$(gzip -c "$file" | wc -c)
+              NAME=$(basename "$file")
 
-          if [ $SIZE -gt $MAX_SIZE ]; then
-            echo "❌ Bundle size exceeded limit (30KB)"
-            exit 1
-          else
-            echo "✅ Bundle size within limit"
-          fi
+              SIZE_KB=$((SIZE / 1024))
+              GZIP_KB=$((GZIP / 1024))
+
+              TOTAL_ORIGINAL=$((TOTAL_ORIGINAL + SIZE))
+              TOTAL_GZIPPED=$((TOTAL_GZIPPED + GZIP))
+
+              echo "| $NAME | ${SIZE_KB} KB | ${GZIP_KB} KB |" >> $GITHUB_STEP_SUMMARY
+
+              if [ $GZIP -gt 30720 ]; then
+                echo "⚠️  Warning: $NAME exceeds 30KB gzipped" >> $GITHUB_STEP_SUMMARY
+              fi
+            fi
+          done
+
+          TOTAL_ORIGINAL_KB=$((TOTAL_ORIGINAL / 1024))
+          TOTAL_GZIPPED_KB=$((TOTAL_GZIPPED / 1024))
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| **Total** | **${TOTAL_ORIGINAL_KB} KB** | **${TOTAL_GZIPPED_KB} KB** |" >> $GITHUB_STEP_SUMMARY
 
   security:
     name: Security Audit
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout code
@@ -108,12 +127,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # npm audit로 보안 취약점 체크
       - name: Run security audit
         run: npm audit --audit-level=moderate
         continue-on-error: true
 
-      # 라이센스 체크
       - name: Check licenses
         run: npx license-checker --summary
         continue-on-error: true

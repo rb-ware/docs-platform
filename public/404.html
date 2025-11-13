@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    // GitHub Pages SPA fallback
+    // Redirect 404 to index.html with path preserved
+    (function() {
+      const path = window.location.pathname;
+      const basePath = '/docs-platform';
+
+      // Remove base path if present
+      const actualPath = path.startsWith(basePath)
+        ? path.slice(basePath.length)
+        : path;
+
+      // Redirect to index.html with path as query param
+      if (actualPath !== '/' && actualPath !== '/index.html') {
+        window.location.replace(
+          window.location.origin +
+          basePath +
+          '/?p=' +
+          encodeURIComponent(actualPath)
+        );
+      }
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>

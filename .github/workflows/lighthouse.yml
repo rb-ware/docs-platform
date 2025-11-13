@@ -30,23 +30,13 @@ jobs:
       - name: Build site for Lighthouse
         run: NODE_ENV=development npm run build
 
-      # 빌드된 사이트를 서빙할 HTTP 서버 시작
-      - name: Start HTTP server
-        run: |
-          npx serve -s dist -l 5000 > /dev/null 2>&1 &
-          echo "Waiting for server to be ready..."
-          timeout 30 bash -c 'until curl -s http://localhost:5000/ > /dev/null; do sleep 1; done'
-          echo "Server is ready"
-
-      # Lighthouse CI 실행
+      # Lighthouse CI 실행 (서버 시작은 .lighthouserc.json에서 처리)
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v10
         with:
-          urls: |
-            http://localhost:5000/
+          configPath: './.lighthouserc.json'
           uploadArtifacts: true
           temporaryPublicStorage: true
-          runs: 3
 
   # 번들 크기 모니터링
   bundle-size:

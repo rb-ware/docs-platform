@@ -1,13 +1,11 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "npm run preview",
-      "startServerReadyPattern": "Local:.*(http:\\/\\/[^\\s]+)",
+      "startServerCommand": "npx serve -s dist -l 5000",
+      "startServerReadyPattern": "Accepting connections",
       "startServerReadyTimeout": 30000,
       "url": [
-        "http://localhost:4173/",
-        "http://localhost:4173/ko",
-        "http://localhost:4173/en"
+        "http://localhost:5000/"
       ],
       "numberOfRuns": 3
     },

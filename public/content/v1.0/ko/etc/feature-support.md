@@ -49,8 +49,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="unsupported" title=" 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
+      <td class="unsupported" title=" 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
     </tr>
     <tr>
       <td class="feature-col">메모리 모드</td>
@@ -58,8 +58,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="unsupported" title=" 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
+      <td class="unsupported" title=" 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
     </tr>
     <tr>
       <td class="feature-col">수동 모드</td>
@@ -67,8 +67,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="unsupported" title="Kolarc 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
-      <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="unsupported" title=" 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
+      <td class="unsupported" title=" 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
     </tr>
     <tr>
       <td class="feature-col">추가 옵션</td>
@@ -76,8 +76,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="unsupported" title=" 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
+      <td class="unsupported" title=" 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
     </tr>
     <!-- Setup -->
     <tr>
@@ -284,8 +284,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="pc">PC</td>
+      <td class="pc">PC</td>
     </tr>
     <tr>
       <td class="feature-col">정지 / 비상정지</td>

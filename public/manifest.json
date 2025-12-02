@@ -81,9 +81,68 @@
       ]
     },
     {
+      "id": "welding_machine",
+      "key": "welding_machine",
+      "order": 2,
+      "title": {
+        "ko": "용접기",
+        "en": "Welding Machine"
+      },
+      "items": [
+        {
+          "key": "analog",
+          "slug": "welding-machine/Analog",
+          "title": {
+            "ko": "Analog",
+            "en": "Analog"
+          }
+        },
+        {
+          "key": "kemppi",
+          "slug": "welding-machine/Kemppi",
+          "title": {
+            "ko": "Kemppi",
+            "en": "Kemppi"
+          }
+        },
+        {
+          "key": "weco",
+          "slug": "welding-machine/Weco",
+          "title": {
+            "ko": "Weco",
+            "en": "Weco"
+          }
+        },
+        {
+          "key": "kolarc",
+          "slug": "welding-machine/Kolarc",
+          "title": {
+            "ko": "Kolarc",
+            "en": "Kolarc"
+          }
+        },
+        {
+          "key": "imt",
+          "slug": "welding-machine/IMT",
+          "title": {
+            "ko": "IMT",
+            "en": "IMT"
+          }
+        },
+        {
+          "key": "maven",
+          "slug": "welding-machine/Maven",
+          "title": {
+            "ko": "Maven",
+            "en": "Maven"
+          }
+        }
+      ]
+    },
+    {
       "id": "extension",
       "key": "extension",
-      "order": 2,
+      "order": 3,
       "title": {
         "ko": "확장 기능",
         "en": "Extension"
@@ -166,7 +225,7 @@
     {
       "id": "tools",
       "key": "tools",
-      "order": 3,
+      "order": 4,
       "title": {
         "ko": "Tool",
         "en": "Tools"
@@ -201,7 +260,7 @@
     {
       "id": "etc",
       "key": "etc",
-      "order": 4,
+      "order": 5,
       "title": {
         "ko": "기타",
         "en": "Etc"
@@ -213,6 +272,14 @@
           "title": {
             "ko": "라이선스 관리자",
             "en": "License Manager"
+          }
+        },
+        {
+          "key": "feature_support",
+          "slug": "etc/feature-support",
+          "title": {
+            "ko": "용접기 기능 지원 목록",
+            "en": "Feature Support List"
           }
         }
       ]

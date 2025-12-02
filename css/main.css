@@ -190,3 +190,138 @@
 .prose :where(input[type="checkbox"]):not(:where([class~="not-prose"] *)) {
   margin-right: 0.5em;
 }
+
+/* Feature Support Table - Sticky Header */
+.table-container {
+  max-height: 70vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.prose .feature-table {
+  display: table !important;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+  margin: 0;
+}
+
+.prose .feature-table th,
+.prose .feature-table td {
+  border: 1px solid #e1e5e9;
+  padding: 4px 12px;
+  text-align: center;
+  background-clip: padding-box;
+}
+
+.prose .feature-table th {
+  background: #1e293b;
+  color: white;
+  font-weight: 600;
+  position: sticky;
+  z-index: 10;
+}
+
+.prose .feature-table thead tr:first-child th {
+  top: 0;
+}
+
+.prose .feature-table thead tr:nth-child(2) th {
+  top: 27px;
+}
+
+.prose .feature-table .header-mig {
+  background: #0369a1;
+  color: white;
+}
+
+.prose .feature-table .header-laser {
+  background: #7c3aed;
+  color: white;
+}
+
+.prose .feature-table .menu-col {
+  background: #334155;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  min-width: 100px;
+}
+
+.prose .feature-table .feature-col {
+  background: #f8fafc;
+  text-align: left;
+  font-weight: 500;
+  min-width: 140px;
+  color: #334155;
+}
+
+.prose .feature-table .app {
+  background: #dcfce7;
+  color: #166534;
+  font-weight: 600;
+}
+
+.prose .feature-table .pc {
+  background: #fef3c7;
+  color: #92400e;
+  font-weight: 600;
+}
+
+.prose .feature-table .none {
+  background: #f1f5f9;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.prose .feature-table tbody tr:hover td.feature-col {
+  background: #e0f2fe;
+}
+
+.prose .feature-table tbody tr:hover td.app {
+  background: #bbf7d0;
+}
+
+.prose .feature-table tbody tr:hover td.pc {
+  background: #fde68a;
+}
+
+.prose .feature-table tbody tr:hover td.none {
+  background: #e2e8f0;
+}
+
+.legend-box {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.legend-color {
+  width: 32px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 11px;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.update-date {
+  font-size: 12px;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 4px;
+}

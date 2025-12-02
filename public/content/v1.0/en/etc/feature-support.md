@@ -58,8 +58,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="none" title="This feature is in development for IMT welders.">-</td>
-      <td class="none" title="This feature is in development for Maven welders.">-</td>
+      <td class="unsupported" title="This feature is not supported on this welders.">X</td>
+      <td class="unsupported" title="This feature is not supported on this welders.">X</td>
     </tr>
     <tr>
       <td class="feature-col">Manual Mode</td>
@@ -67,8 +67,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="unsupported" title="This feature is not supported on Kolarc welders.">X</td>
-      <td class="none" title="This feature is in development for IMT welders.">-</td>
-      <td class="none" title="This feature is in development for Maven welders.">-</td>
+      <td class="unsupported" title="This feature is not supported on this welders.">X</td>
+      <td class="unsupported" title="This feature is not supported on this welders.">X</td>
     </tr>
     <tr>
       <td class="feature-col">Additional Option</td>
@@ -76,8 +76,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="none" title="This feature is in development for IMT welders.">-</td>
-      <td class="none" title="This feature is in development for Maven welders.">-</td>
+      <td class="unsupported" title="This feature is not supported on this welders.">X</td>
+      <td class="unsupported" title="This feature is not supported on this welders.">X</td>
     </tr>
     <!-- Setup -->
     <tr>

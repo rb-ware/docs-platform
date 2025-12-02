@@ -232,9 +232,9 @@
     <tr>
       <td class="feature-col">Program Scheduler</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
+      <td class="pc">PC</td>
+      <td class="pc">PC</td>
       <td class="none" title="This feature is in development for IMT welders.">-</td>
       <td class="none" title="This feature is in development for Maven welders.">-</td>
     </tr>

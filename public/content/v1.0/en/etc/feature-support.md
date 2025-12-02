@@ -1,4 +1,4 @@
-# RB-X Welding Machine Interface Feature Support List
+# RB-X Welding Machine Feature Support List
 
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
   <div class="legend-box">

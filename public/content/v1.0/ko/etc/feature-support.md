@@ -1,4 +1,4 @@
-# RB-X 용접기 인터페이스별 기능 지원 목록
+# RB-X 용접기 기능 지원 목록
 
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
   <div class="legend-box">

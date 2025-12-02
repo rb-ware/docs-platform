@@ -177,10 +177,10 @@
       <td class="feature-col">Weld Adjust</td>
       <td class="none" title="This feature is in development for Analog welders.">-</td>
       <td class="pc">PC</td>
-      <td class="unsupported" title="This feature is not supported on Weco welders.">X</td>
+      <td class="none" title="This feature is in development for Weco welders.">-</td>
       <td class="pc">PC</td>
-      <td class="unsupported" title="This feature is not supported on IMT welders.">X</td>
-      <td class="unsupported" title="This feature is not supported on Maven welders.">X</td>
+      <td class="none" title="This feature is in development for IMT welders.">-</td>
+      <td class="none" title="This feature is in development for Maven welders.">-</td>
     </tr>
     <tr>
       <td class="feature-col">Repeat</td>

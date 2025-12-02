@@ -177,10 +177,10 @@
       <td class="feature-col">용접 조정</td>
       <td class="none" title="Analog 용접기에서 개발 예정입니다.">-</td>
       <td class="pc">PC</td>
-      <td class="unsupported" title="Weco 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
+      <td class="none" title="Weco 용접기에서 개발 예정입니다.">-</td>
       <td class="pc">PC</td>
-      <td class="unsupported" title="IMT 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
-      <td class="unsupported" title="Maven 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
+      <td class="none" title="IMT 용접기에서 개발 예정입니다.">-</td>
+      <td class="none" title="Maven 용접기에서 개발 예정입니다.">-</td>
     </tr>
     <tr>
       <td class="feature-col">반복</td>

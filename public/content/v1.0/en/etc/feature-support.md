@@ -214,9 +214,9 @@
       <td class="menu-col" rowspan="3">Tool</td>
       <td class="feature-col">Download RB_Log</td>
       <td class="app">App</td>
-      <td class="pc">PC</td>
       <td class="app">App</td>
-      <td class="pc">PC</td>
+      <td class="app">App</td>
+      <td class="app">App</td>
       <td class="app">App</td>
       <td class="app">App</td>
     </tr>

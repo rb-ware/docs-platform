@@ -214,9 +214,9 @@
       <td class="menu-col" rowspan="3">도구</td>
       <td class="feature-col">RB 로그 다운로드</td>
       <td class="app">App</td>
-      <td class="pc">PC</td>
       <td class="app">App</td>
-      <td class="pc">PC</td>
+      <td class="app">App</td>
+      <td class="app">App</td>
       <td class="app">App</td>
       <td class="app">App</td>
     </tr>

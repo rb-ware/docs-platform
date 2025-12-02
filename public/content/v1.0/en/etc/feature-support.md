@@ -204,10 +204,10 @@
       <td class="feature-col">Ext. Axis</td>
       <td class="pc">PC</td>
       <td class="pc">PC</td>
-      <td class="none" title="This feature is not supported on Weco welders.">-</td>
       <td class="pc">PC</td>
-      <td class="none" title="This feature is not supported on IMT welders.">-</td>
-      <td class="none" title="This feature is not supported on Maven welders.">-</td>
+      <td class="pc">PC</td>
+      <td class="none" title="This feature is in development for IMT welders.">-</td>
+      <td class="none" title="This feature is in development for Maven welders.">-</td>
     </tr>
     <!-- Tool -->
     <tr>
@@ -231,12 +231,12 @@
     </tr>
     <tr>
       <td class="feature-col">Program Scheduler</td>
+      <td class="pc">PC</td>
       <td class="app">App</td>
+      <td class="pc">PC</td>
       <td class="app">App</td>
-      <td class="none" title="This feature is not supported on Weco welders.">-</td>
-      <td class="app">App</td>
-      <td class="none" title="This feature is not supported on IMT welders.">-</td>
-      <td class="none" title="This feature is not supported on Maven welders.">-</td>
+      <td class="none" title="This feature is in development for IMT welders.">-</td>
+      <td class="none" title="This feature is in development for Maven welders.">-</td>
     </tr>
     <!-- Welder Feature -->
     <tr>

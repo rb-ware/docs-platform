@@ -204,7 +204,7 @@
       <td class="feature-col">외부 축</td>
       <td class="pc">PC</td>
       <td class="pc">PC</td>
-      <td class="none" title="Weco 용접기에서 해당 기능을 지원하지 않습니다.">-</td>
+      <td class="pc">PC</td>
       <td class="pc">PC</td>
       <td class="none" title="IMT 용접기에서 해당 기능을 지원하지 않습니다.">-</td>
       <td class="none" title="Maven 용접기에서 해당 기능을 지원하지 않습니다.">-</td>
@@ -231,9 +231,9 @@
     </tr>
     <tr>
       <td class="feature-col">프로그램 스케줄러</td>
+      <td class="pc">PC</td>
       <td class="app">App</td>
-      <td class="app">App</td>
-      <td class="none" title="Weco 용접기에서 해당 기능을 지원하지 않습니다.">-</td>
+      <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="none" title="IMT 용접기에서 해당 기능을 지원하지 않습니다.">-</td>
       <td class="none" title="Maven 용접기에서 해당 기능을 지원하지 않습니다.">-</td>

@@ -49,8 +49,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="pc">PC</td>
+      <td class="pc">PC</td>
     </tr>
     <tr>
       <td class="feature-col">Memory Mode</td>
@@ -58,8 +58,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="none" title="This feature is in development for IMT welders.">-</td>
+      <td class="none" title="This feature is in development for Maven welders.">-</td>
     </tr>
     <tr>
       <td class="feature-col">Manual Mode</td>
@@ -67,8 +67,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="unsupported" title="This feature is not supported on Kolarc welders.">X</td>
-      <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="none" title="This feature is in development for IMT welders.">-</td>
+      <td class="none" title="This feature is in development for Maven welders.">-</td>
     </tr>
     <tr>
       <td class="feature-col">Additional Option</td>
@@ -76,8 +76,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="none" title="This feature is in development for IMT welders.">-</td>
+      <td class="none" title="This feature is in development for Maven welders.">-</td>
     </tr>
     <!-- Setup -->
     <tr>
@@ -247,7 +247,7 @@
       <td class="app">App</td>
       <td class="pc">PC</td>
       <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="pc">PC</td>
     </tr>
     <tr>
       <td class="feature-col">Inching, Back Inching</td>
@@ -255,8 +255,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="pc">PC</td>
+      <td class="pc">PC</td>
     </tr>
     <tr>
       <td class="feature-col">No Arc</td>
@@ -284,8 +284,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
-      <td class="app">App</td>
+      <td class="pc">PC</td>
+      <td class="pc">PC</td>
     </tr>
     <tr>
       <td class="feature-col">Stop / Emergency Stop</td>

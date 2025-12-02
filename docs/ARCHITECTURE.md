@@ -436,11 +436,73 @@ security: {
 
 ---
 
-## 13. 연락처
+## 13. 유틸리티 시스템
+
+### 13.1 에러 트래킹 (ErrorHandler.js)
+
+```javascript
+import { ErrorHandler, ErrorCategory, ErrorSeverity } from './utils/ErrorHandler.js';
+
+ErrorHandler.capture(error, {
+  category: ErrorCategory.NETWORK,  // NETWORK, CONTENT, NAVIGATION, SEARCH, UI
+  severity: ErrorSeverity.HIGH,     // LOW, MEDIUM, HIGH, CRITICAL
+  context: { url },
+  showUser: true
+});
+
+// 디버깅: __errorHandler.getStats()
+```
+
+### 13.2 로깅 (Logger.js)
+
+```javascript
+import { Logger } from './utils/Logger.js';
+
+Logger.debug('Debug message');  // 개발 환경만
+Logger.info('Info message');
+Logger.warn('Warning');
+Logger.error('Error');
+
+// 디버깅: __logger.getLogs()
+```
+
+### 13.3 이미지 최적화 (ImageOptimizer.js)
+
+- Lazy Loading: `data-src` 속성 사용
+- 빌드 시 자동 압축 (vite-plugin-imagemin)
+
+```html
+<img data-src="path/to/image.png" alt="설명" loading="lazy" />
+```
+
+---
+
+## 14. CI/CD 파이프라인
+
+### 워크플로우 파일 (.github/workflows/)
+
+| 파일 | 트리거 | 역할 |
+|------|--------|------|
+| test.yml | PR | 테스트 + 번들 사이즈 체크 |
+| deploy.yml | main push | 빌드 → GitHub Pages 배포 |
+| lighthouse.yml | PR/main | 성능 점수 체크 |
+
+### 배포 플로우
+
+```
+git push origin main
+  → test.yml (테스트)
+  → deploy.yml (빌드 + 배포)
+  → GitHub Pages 업데이트
+```
+
+---
+
+## 15. 연락처
 
 - **Repository**: https://github.com/rb-ware/docs-platform
 - **Issues**: https://github.com/rb-ware/docs-platform/issues
 
 ---
 
-*최종 업데이트: 2024.12.02*
+*최종 업데이트: 2025.12.02*

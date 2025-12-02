@@ -207,7 +207,7 @@
       <td class="pc">PC</td>
       <td class="pc">PC</td>
       <td class="none" title="This feature is in development for IMT welders.">-</td>
-      <td class="none" title="This feature is in development for Maven welders.">-</td>
+      <td class="pc">PC</td>
     </tr>
     <!-- Tool -->
     <tr>

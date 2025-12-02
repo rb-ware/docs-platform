@@ -246,7 +246,7 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="app">App</td>
+      <td class="pc">PC</td>
       <td class="pc">PC</td>
     </tr>
     <tr>

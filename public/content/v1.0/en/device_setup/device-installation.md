@@ -49,6 +49,7 @@ The default network range is **192.168.0.x**.
 | RB Robot Control Box | `192.168.0.100` | LAN |
 | Welder (Weco) | `192.168.0.12` | LAN |
 | Welder (Kemppi) | `192.168.0.10` | LAN |
+| Welder (Kolarc) | `192.168.1.11` | LAN |
 | Mini PC | `192.168.0.210` | LAN |
 | Tablet | DHCP (Auto) | WiFi |
 
@@ -124,7 +125,8 @@ Gateway          : 192.168.0.1
 Robot Control Box: 192.168.0.100
 Weco Welder      : 192.168.0.12
 Kemppi Welder    : 192.168.0.10
-Mini PC          : 192.168.0.210
+Kolarc Welder    : 192.168.1.11
+Mini PC          : 192.168.0.210 (kolarc use: 192.168.1.210)
 Tablet           : DHCP
 ```
 

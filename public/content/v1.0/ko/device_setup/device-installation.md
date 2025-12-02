@@ -49,6 +49,7 @@ RB-X 시스템을 설치하고 네트워크를 구성하는 방법을 설명합�
 | RB로봇 컨트롤박스 | `192.168.0.100` | LAN |
 | 용접기 (Weco) | `192.168.0.12` | LAN |
 | 용접기 (Kemppi) | `192.168.0.10` | LAN |
+| 용접기 (Kolarc) | `192.168.1.11` | LAN |
 | Mini PC | `192.168.0.210` | LAN |
 | 태블릿 | DHCP (자동) | WiFi |
 
@@ -124,7 +125,8 @@ Gateway          : 192.168.0.1
 Robot Control Box: 192.168.0.100
 Weco Welder      : 192.168.0.12
 Kemppi Welder    : 192.168.0.10
-Mini PC          : 192.168.0.210
+Kolarc Welder    : 192.168.1.11
+Mini PC          : 192.168.0.210 (kolarc 사용 시 192.168.1.210)
 Tablet           : DHCP
 ```
 

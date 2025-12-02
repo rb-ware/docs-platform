@@ -12,10 +12,14 @@
     </div>
     <div class="legend-item">
       <span class="legend-color" style="background:#f1f5f9;color:#94a3b8">-</span>
+      <span>개발예정</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-color" style="background:#fecaca;color:#991b1b">X</span>
       <span>미지원</span>
     </div>
   </div>
-  <div class="update-date" style="font-size:14px;font-weight:600;">기준일: 2024.12.02</div>
+  <div class="update-date" style="font-size:14px;font-weight:600;">기준일: 2025.12.02</div>
 </div>
 
 <div class="table-container">
@@ -53,7 +57,7 @@
       <td class="app">App</td>
       <td class="pc">PC</td>
       <td class="app">App</td>
-      <td class="none" title="Kolarc 용접기에서 해당 기능을 지원하지 않습니다.">-</td>
+      <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="app">App</td>
     </tr>
@@ -62,7 +66,7 @@
       <td class="app">App</td>
       <td class="pc">PC</td>
       <td class="app">App</td>
-      <td class="pc">PC</td>
+      <td class="unsupported" title="Kolarc 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
       <td class="app">App</td>
       <td class="app">App</td>
     </tr>
@@ -171,12 +175,12 @@
     </tr>
     <tr>
       <td class="feature-col">용접 조정</td>
-      <td class="app">App</td>
+      <td class="none" title="Analog 용접기에서 개발 예정입니다.">-</td>
       <td class="pc">PC</td>
-      <td class="none" title="Weco 용접기에서 해당 기능을 지원하지 않습니다.">-</td>
+      <td class="unsupported" title="Weco 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
       <td class="pc">PC</td>
-      <td class="none" title="IMT 용접기에서 해당 기능을 지원하지 않습니다.">-</td>
-      <td class="none" title="Maven 용접기에서 해당 기능을 지원하지 않습니다.">-</td>
+      <td class="unsupported" title="IMT 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
+      <td class="unsupported" title="Maven 용접기에서 해당 기능을 지원하지 않습니다.">X</td>
     </tr>
     <tr>
       <td class="feature-col">반복</td>

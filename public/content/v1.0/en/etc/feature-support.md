@@ -12,10 +12,14 @@
     </div>
     <div class="legend-item">
       <span class="legend-color" style="background:#f1f5f9;color:#94a3b8">-</span>
+      <span>In Development</span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-color" style="background:#fecaca;color:#991b1b">X</span>
       <span>Not Supported</span>
     </div>
   </div>
-  <div class="update-date" style="font-size:14px;font-weight:600;">As of: 2024.12.02</div>
+  <div class="update-date" style="font-size:14px;font-weight:600;">As of: 2025.12.02</div>
 </div>
 
 <div class="table-container">
@@ -53,7 +57,7 @@
       <td class="app">App</td>
       <td class="pc">PC</td>
       <td class="app">App</td>
-      <td class="none" title="This feature is not supported on Kolarc welders.">-</td>
+      <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="app">App</td>
     </tr>
@@ -62,7 +66,7 @@
       <td class="app">App</td>
       <td class="pc">PC</td>
       <td class="app">App</td>
-      <td class="pc">PC</td>
+      <td class="unsupported" title="This feature is not supported on Kolarc welders.">X</td>
       <td class="app">App</td>
       <td class="app">App</td>
     </tr>
@@ -171,12 +175,12 @@
     </tr>
     <tr>
       <td class="feature-col">Weld Adjust</td>
-      <td class="app">App</td>
+      <td class="none" title="This feature is in development for Analog welders.">-</td>
       <td class="pc">PC</td>
-      <td class="none" title="This feature is not supported on Weco welders.">-</td>
+      <td class="unsupported" title="This feature is not supported on Weco welders.">X</td>
       <td class="pc">PC</td>
-      <td class="none" title="This feature is not supported on IMT welders.">-</td>
-      <td class="none" title="This feature is not supported on Maven welders.">-</td>
+      <td class="unsupported" title="This feature is not supported on IMT welders.">X</td>
+      <td class="unsupported" title="This feature is not supported on Maven welders.">X</td>
     </tr>
     <tr>
       <td class="feature-col">Repeat</td>

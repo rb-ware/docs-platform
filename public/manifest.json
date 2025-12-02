@@ -26,14 +26,6 @@
             "ko": "장비 간 통신 연결",
             "en": "Communication Setup"
           }
-        },
-        {
-          "key": "license_installation",
-          "slug": "device_setup/license-installation",
-          "title": {
-            "ko": "라이선스 설치",
-            "en": "License Installation"
-          }
         }
       ]
     },

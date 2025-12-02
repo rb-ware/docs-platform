@@ -41,7 +41,7 @@ export function generateLandingHTML(content) {
           </span>
         </a>
 
-        <a href="https://rbweld-my.sharepoint.com/:f:/g/personal/juho_park_rb-ware_com/Evhj4zga8jNAtzfYnTVzntQBRALG4VEs5vN7Qd5BWF4dGA?e=rI8h7H" target="_blank" rel="noopener noreferrer"
+        <a href="https://rbweld-my.sharepoint.com/:f:/g/personal/juho_park_rb-ware_com/Evhj4zga8jNAtzfYnTVzntQBnO3AnarRJ9Z9PWUuBQvQ0Q" target="_blank" rel="noopener noreferrer"
            class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-[#ff2e2e] bg-white rounded-full overflow-hidden shadow-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-white">
           <span class="relative z-10 flex items-center">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

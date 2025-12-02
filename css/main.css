@@ -276,6 +276,12 @@
   font-weight: 500;
 }
 
+.prose .feature-table .unsupported {
+  background: #fecaca;
+  color: #991b1b;
+  font-weight: 600;
+}
+
 .prose .feature-table tbody tr:hover td.feature-col {
   background: #e0f2fe;
 }
@@ -290,6 +296,10 @@
 
 .prose .feature-table tbody tr:hover td.none {
   background: #e2e8f0;
+}
+
+.prose .feature-table tbody tr:hover td.unsupported {
+  background: #fca5a5;
 }
 
 .legend-box {

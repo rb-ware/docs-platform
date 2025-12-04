@@ -49,8 +49,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="pc">PC</td>
-      <td class="pc">PC</td>
+      <td class="app">App</td>
+      <td class="app">App</td>
     </tr>
     <tr>
       <td class="feature-col">Memory Mode</td>
@@ -246,8 +246,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="pc">PC</td>
-      <td class="pc">PC</td>
+      <td class="app">App</td>
+      <td class="app">App</td>
     </tr>
     <tr>
       <td class="feature-col">Inching, Back Inching</td>
@@ -284,8 +284,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="pc">PC</td>
-      <td class="pc">PC</td>
+      <td class="app">App</td>
+      <td class="app">App</td>
     </tr>
     <tr>
       <td class="feature-col">Stop / Emergency Stop</td>

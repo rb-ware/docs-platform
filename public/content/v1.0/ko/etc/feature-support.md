@@ -49,8 +49,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="pc">PC</td>
-      <td class="pc">PC</td>
+      <td class="app">App</td>
+      <td class="app">App</td>
     </tr>
     <tr>
       <td class="feature-col">메모리 모드</td>
@@ -246,8 +246,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="pc">PC</td>
-      <td class="pc">PC</td>
+      <td class="app">App</td>
+      <td class="app">App</td>
     </tr>
     <tr>
       <td class="feature-col">인칭, 백인칭</td>
@@ -284,8 +284,8 @@
       <td class="pc">PC</td>
       <td class="app">App</td>
       <td class="pc">PC</td>
-      <td class="pc">PC</td>
-      <td class="pc">PC</td>
+      <td class="app">App</td>
+      <td class="app">App</td>
     </tr>
     <tr>
       <td class="feature-col">정지 / 비상정지</td>

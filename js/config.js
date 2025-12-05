@@ -127,13 +127,9 @@ export function isValidSlug(slug) {
     return false;
   }
 
-  // Check pattern
+  // Check pattern (alphanumeric, hyphens, underscores, slashes only)
+  // Note: This pattern already blocks '..' since '.' is not allowed
   if (!CONFIG.security.slugPattern.test(slug)) {
-    return false;
-  }
-
-  // Check for path traversal attempts
-  if (slug.includes('..')) {
     return false;
   }
 

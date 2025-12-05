@@ -12,6 +12,14 @@
       },
       "items": [
         {
+          "key": "minipc_setup",
+          "slug": "device_setup/minipc-setup",
+          "title": {
+            "ko": "MiniPC 세팅",
+            "en": "MiniPC Setup"
+          }
+        },
+        {
           "key": "device_installation",
           "slug": "device_setup/device-installation",
           "title": {

@@ -1,65 +1,27 @@
 {
   "hero": {
-    "title": {
-      "line1": "Welcome to",
-      "line2": "RBWare Tech Docs"
+    "title": "RBWare Tech Docs",
+    "subtitle": "Collaborative robot software for welding and grinding automation"
+  },
+  "actions": {
+    "manual": {
+      "title": "Manual",
+      "description": "RB-X software installation, setup and user guide",
+      "cta": "View Docs"
     },
-    "subtitle": "Simplifying Welding Automation. Empowering Smart Fabrication.",
-    "description": "Collaborative robots meet intelligent software. The easiest way to achieve professional welding and grinding.",
-    "buttons": {
-      "manual": "RB-X Manual",
-      "download": "Download"
+    "download": {
+      "title": "Download",
+      "description": "Latest software and update files",
+      "cta": "Download Center"
+    },
+    "email": {
+      "title": "Support",
+      "description": "Technical inquiries and support requests",
+      "cta": "Contact Us"
     }
   },
-  "features": {
-    "title": "Why RB-X?",
-    "subtitle": "Simple yet powerful solution for welding & grinding automation",
-    "items": [
-      {
-        "title": "Easy to Use",
-        "description": "Intuitive interface designed for quick setup and operation without complex programming."
-      },
-      {
-        "title": "Fast & Efficient",
-        "description": "Reduce setup time and increase productivity with streamlined workflows."
-      },
-      {
-        "title": "Proven Reliability",
-        "description": "Field-tested stability for industrial welding and grinding applications."
-      }
-    ]
-  },
-  "resources": {
-    "title": "Related Resources",
-    "subtitle": "Additional resources and support",
-    "items": [
-      {
-        "title": "RBWare Official Website",
-        "description": "Visit our main website for product information and company news.",
-        "url": "www.rb-ware.com"
-      },
-      {
-        "title": "Rainbow Robotics Technical Docs",
-        "description": "Comprehensive technical documentation for RB Cobot series.",
-        "url": "rainbowrobotics.github.io"
-      },
-      {
-        "title": "Email Support",
-        "description": "Get help from our technical support team.",
-        "url": "juho.park@rbware.co.kr"
-      },
-      {
-        "title": "Getting Started Guide",
-        "description": "Step-by-step installation and setup instructions.",
-        "url": "Begin your journey →"
-      }
-    ]
-  },
   "footer": {
-    "companyTitle": "RBWare",
-    "companyDescription": "Collaborative robot solutions for welding and grinding automation. Easy-to-use software for professional applications.",
-    "contactTitle": "Contact",
-    "email": "Email: sales@rb-ware.com",
-    "copyright": "© 2025 RBWare Co., Ltd. All rights reserved."
+    "copyright": "© 2025 RBWare Co., Ltd.",
+    "website": "rb-ware.com"
   }
 }
